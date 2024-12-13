@@ -1,0 +1,9 @@
+For client:
+	requests
+	time
+	os
+	re
+For server:
+	http.server
+	json
+	os
