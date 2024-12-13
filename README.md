@@ -1,1 +1,1 @@
-"# gomoke-cli" 
+# gomoke-cli
