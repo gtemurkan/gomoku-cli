@@ -4,7 +4,7 @@ Gomoku CLI game
 How to play
 -----------
 
-To play on the official server only **gomoku.py** module required.
+To play on the official server only **gomoku.py** module is required.
 
 Launch on Windows:
 ```
@@ -19,7 +19,7 @@ python3 gomoku.py
 Custom server
 -------------
 
-For server **gomoku-server.py** module is needed to be launched.
+For games on custom server **gomoku-server.py** module is required.
 
 Launch on Windows:
 ```
