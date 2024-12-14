@@ -1,0 +1,5 @@
+/__pycache__
+/GAMES_HISTORY
+/data_game.json
+/.git*
+!.gitignore

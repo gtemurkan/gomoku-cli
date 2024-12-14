@@ -63,8 +63,6 @@ class GameServer(BaseHTTPRequestHandler):
             self.send_json_response({"success": False, "message": "Invalid username"})
 
 
-
-
     def save_game_history(self,GAMES,game_id):
         for user in GAMES[game_id]["players"]:
             with open(f'GAMES_HISTORY/Game_{game_id}_{user}.txt', "a+", encoding="utf-8") as f:
@@ -90,9 +88,6 @@ class GameServer(BaseHTTPRequestHandler):
             print(e)
             self.send_json_response({"success": False, "message": u'The file could not be opened/double-check the data'})
             return
-
-
-
 
 
     def send_json_response(self, response):
@@ -167,7 +162,6 @@ class GameServer(BaseHTTPRequestHandler):
         else:
             self.send_json_response({"success": True, "players": GAMES[game_id]["players"], "turn": GAMES[game_id]["turn"]})
             return
-
 
 
     def view_board(self, data):

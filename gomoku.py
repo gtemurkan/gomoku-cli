@@ -1,32 +1,44 @@
+# gomoku.py
+
+"""This module must be for gomoku game.  """
+
 import requests
 import time
 import os
 import re
 
-class TicTacToeClient:
+
+class GomokuClient:
     def __init__(self):
+        """Initialize GomokuClient
+
+        username
+        """
         self.username = None
         self.game_id = None
         self.SERVER_URL = None
 
-
     def slogan_gomoku(self):
-        print('''
-              ____                           _
-             / ___|  ___   _ __ ___    ___  | | __ _   _
-            | |  _  / _ \ | '_ ` _ \  / _ \ | |/ /| | | |
-            | |_| || (_) || | | | | || (_) ||   < | |_| |
-             \____| \___/ |_| |_| |_| \___/ |_|\_\ \__,_|
+        """Print 'Gomoku' in CLI style"""
+        print(r'''
+      ____                           _
+     / ___|  ___   _ __ ___    ___  | | __ _   _
+    | |  _  / _ \ | '_ ` _ \  / _ \ | |/ /| | | |
+    | |_| || (_) || | | | | || (_) ||   < | |_| |
+     \____| \___/ |_| |_| |_| \___/ |_|\_\ \__,_|
 
-            ''')
+''')
+
     def get_server(self):
+        """Interactively asks user for server url"""
+        IP_PATTERN = (r"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}"
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" "{1}$")
         while True:
-            pattern = r'^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?){1}$'
             ans_server_url = input('''
-        To play on the official server, Enter word: <server>
-        To play on a local network, Enter word: <local>
-        If you want to play on an unofficial server, Enter IP address of this server
-            command: ''')
+To play on a local network, Enter word: <local>
+To play on the official server, Enter word: <server>
+If you want to play on an unofficial server, Enter IP address of that server
+    command: ''')
 
             if ans_server_url in ["server", "<server>"]:
                 self.SERVER_URL = "http://localhost:8080"
@@ -34,7 +46,7 @@ class TicTacToeClient:
             if ans_server_url in ["local", "<local>"]:
                 self.SERVER_URL = "http://localhost:8080"
                 break
-            if bool(re.match(pattern, ans_server_url)):
+            if bool(re.match(IP_PATTERN, ans_server_url)):
                 self.SERVER_URL = ans_server_url
                 break
             else:
@@ -82,6 +94,7 @@ class TicTacToeClient:
             print("Please Login or Register\nIf you're registered, you need to login")
 
     def check_game_history(self):
+        """Checks game history"""
         if self.username:
             os.system('cls')
             self.game_id = input("Enter the number of the game you are interested in, in which you participated: ")
@@ -111,10 +124,6 @@ class TicTacToeClient:
         else:
             os.system('cls')
             print("Please Login or Register\nIf you're registered, you need to login")
-
-
-
-
 
     def join_game(self):
         if self.username:
@@ -197,7 +206,7 @@ class TicTacToeClient:
         if self.game_id and self.username:
             x=None
             y=None
-            res_view=TicTacToeClient.view_board(self)
+            res_view=GomokuClient.view_board(self)
             if res_view == "board_is_shown":
                 try:
                     x = int(input("Enter row (1-19): "))
@@ -248,8 +257,6 @@ class TicTacToeClient:
                                     os.system('cls')
                                     break
                             c_wainting += 1
-
-
             else:
                 os.system('cls')
                 print(data["message"])
@@ -259,9 +266,10 @@ class TicTacToeClient:
         else:
             os.system('cls')
             print("Please Login or Register\nIf you're registered, you need to login")
-if __name__ == "__main__":
-    client = TicTacToeClient()
 
+
+if __name__ == "__main__":
+    client = GomokuClient()
     os.system('cls')
 
     client.get_server()
@@ -274,26 +282,26 @@ if __name__ == "__main__":
         try:
             print("\n1. Register\n2. Login\n3. Create Game\n4. Join Game\n5. Make Move\n6. Check game history\n7. Get ids all games\n8. Exit")
             choice = input("Select an option: ")
-            if choice == "1":
-                client.register()
-            elif choice == "2":
-                client.login()
-            elif choice == "3":
-                client.create_game()
-            elif choice == "4":
-                client.join_game()
-            elif choice == "5":
-                client.make_move()
-            elif choice == "6":
-                client.check_game_history()
-            elif choice == "7":
-                client.get_ids_all_games()
-            elif choice == "8":
-                break
-            else:
-                print("Invalid choice. Try again.")
+            match choice:
+                case "1":
+                    client.register()
+                case "2":
+                    client.login()
+                case "3":
+                    client.create_game()
+                case "4":
+                    client.join_game()
+                case "5":
+                    client.make_move()
+                case "6":
+                    client.check_game_history()
+                case "7":
+                    client.get_ids_all_games()
+                case "8":
+                    break
+                case _:
+                    print("Invalid choice. Try again.")
         except ConnectionError:
             print("Проверьте доступ к сети\nИли обратитесь к администратору сервера")
         except Exception as e:
             print(f"{type(e).__name__}\nError: {e}")
-
