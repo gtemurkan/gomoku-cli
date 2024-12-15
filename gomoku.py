@@ -216,7 +216,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                 verify=False
             )
             print(response.json()["message"])
-            c_wainting = 1
+            c_waiting = 1
             while True:
                 print(f'Wait 10 seconds for second user')
                 time.sleep(10)
@@ -237,11 +237,11 @@ If you want to play on an unofficial server, Enter IP address of that server
                         print("Your turn\nLet's make  move")
                     else:
                         print("Not your turn\nLet's wait opponent's move")
-                        c_wainting = 1
+                        c_waiting = 1
                         while True:
-                            print(f'Wait {2.5 * c_wainting}'
+                            print(f'Wait {2 * c_waiting}'
                                   'seconds for second user')
-                            time.sleep(2.5*c_wainting)
+                            time.sleep(2*c_waiting)
                             response = requests.post(
                                 f"{self.SERVER_URL}/wait_move_second",
                                 json={"username": self.username,
@@ -254,7 +254,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                                 print(f'Your opponent has made a move.')
                                 break
                             else:
-                                if c_wainting % 6 == 0:
+                                if c_waiting % 6 == 0:
                                     os.system('cls')
                                     want_exit = input(
                                         "Second user hasn't made a move yet\n"
@@ -262,6 +262,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                                         "write <cont>\nIf you wait exit "
                                         "write <exit>\n command: ")
                                     if want_exit in ["<cont>", "cont"]:
+                                        c_waiting=1
                                         continue
                                     elif want_exit in ["<exit>", "exit"]:
                                         os.system('cls')
@@ -269,9 +270,9 @@ If you want to play on an unofficial server, Enter IP address of that server
                                     else:
                                         print("Write only <cont> or <exit>")
                                 else:
-                                    c_wainting += 1
+                                    c_waiting += 1
                     break
-                elif c_wainting % 6 == 0:
+                elif c_waiting % 6 == 0:
                     os.system('cls')
                     want_exit = input(
                         "Second user not connected yet\n"
@@ -279,7 +280,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                         "If you wait exit write <exit>\n command: "
                     )
                     if want_exit in ["<cont>", "cont"]:
-
+                        c_waiting=1
                         continue
                     elif want_exit in ["<exit>", "exit"]:
                         os.system('cls')
@@ -287,7 +288,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                     else:
                         print("Write only <cont> or <exit>")
                 else:
-                    c_wainting += 1
+                    c_waiting += 1
 
         else:
             os.system('cls')
@@ -361,10 +362,10 @@ If you want to play on an unofficial server, Enter IP address of that server
                     for _ in range(3):
                         print(f"Winner: {data['winner']}")
                 else:
-                    c_wainting = 1
+                    c_waiting = 1
                     while True:
-                        print(f'Wait {2*(c_wainting)} seconds for second user')
-                        time.sleep(2*c_wainting)
+                        print(f'Wait {2*(c_waiting)} seconds for second user')
+                        time.sleep(2*c_waiting)
                         response = requests.post(
                             f"{self.SERVER_URL}/wait_move_second",
                             json={"username": self.username,
@@ -387,20 +388,20 @@ If you want to play on an unofficial server, Enter IP address of that server
                                 print(f'Your opponent has made a move.')
                             break
                         else:
-                            if c_wainting % 6 == 0:
+                            if c_waiting % 6 == 0:
                                 want_exit = input(
                                     "Second user hasn't made a move yet\n"
                                     "If you want to continue waiting write "
                                     "<cont>\nIf you wait exit write <exit>\n "
                                     "command: ")
                                 if want_exit in ["<cont>", "cont"]:
-                                    c_wainting += 1
+                                    c_waiting = 1
                                     os.system('cls')
                                     continue
                                 if want_exit in ["<exit>", "exit"]:
                                     os.system('cls')
                                     break
-                            c_wainting += 1
+                            c_waiting += 1
             else:
                 os.system('cls')
                 print(data["message"])
