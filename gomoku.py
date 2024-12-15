@@ -1,6 +1,15 @@
-# gomoku.py
+"""
+Gomoku Client Implementation
 
-"""This module must be for gomoku game.  """
+This module provides a client-side implementation of the Gomoku game.
+It supports:
+
+1. Connecting to the game server
+2. Registering and logging in users
+3. Creating and joining games
+4. Making moves and viewing the game board
+5. Checking game history
+"""
 
 import requests
 import time
@@ -9,17 +18,16 @@ import re
 
 
 class GomokuClient:
-    def __init__(self):
-        """Initialize GomokuClient
+    """Client class for interacting with the Gomoku game server."""
 
-        username
-        """
+    def __init__(self):
+        """Initializes the client with default values, such as username and server URL."""
         self.username = None
         self.game_id = None
         self.SERVER_URL = None
 
     def slogan_gomoku(self):
-        """Print 'Gomoku' in CLI style"""
+        """Displays the ASCII art slogan of the game."""
         print(r'''
       ____                           _
      / ___|  ___   _ __ ___    ___  | | __ _   _
@@ -30,7 +38,13 @@ class GomokuClient:
 ''')
 
     def get_server(self):
-        """Interactively asks user for server url"""
+        """Prompts the user to select a server or enter a custom server URL.
+
+        Supports three options:
+        - Local server
+        - Official server
+        - Custom server IP address
+        """
         IP_PATTERN = (r"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}"
                         r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" "{1}$")
         while True:
@@ -53,6 +67,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                 print("BAD VALUE")
 
     def register(self):
+        """Registers a new user by sending their credentials to the server."""
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
@@ -60,6 +75,7 @@ If you want to play on an unofficial server, Enter IP address of that server
         print(response.json()["message"])
 
     def login(self):
+        """Logs in an existing user by verifying credentials with the server."""
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
@@ -69,6 +85,7 @@ If you want to play on an unofficial server, Enter IP address of that server
         print(response.json()["message"])
 
     def get_ids_all_games(self):
+        """Displays ids of all games user played"""
         if self.username:
             response = requests.post(f"{self.SERVER_URL}/get_ids_all_games", json={"username": self.username})
             if response.json()["success"]:
@@ -80,7 +97,9 @@ If you want to play on an unofficial server, Enter IP address of that server
         else:
             os.system('cls')
             print("Please Login or Register\nIf you're registered, you need to login")
+
     def create_game(self):
+        """Creates a new game session and retrieves its game ID from the server."""
         if self.username:
             response = requests.post(f"{self.SERVER_URL}/create_game", json={"username": self.username})
             if response.json()["success"]:
@@ -94,7 +113,7 @@ If you want to play on an unofficial server, Enter IP address of that server
             print("Please Login or Register\nIf you're registered, you need to login")
 
     def check_game_history(self):
-        """Checks game history"""
+        """Interactively shows which moves were made in selected game. Player may choose specific moves."""
         if self.username:
             os.system('cls')
             self.game_id = input("Enter the number of the game you are interested in, in which you participated: ")
@@ -126,6 +145,7 @@ If you want to play on an unofficial server, Enter IP address of that server
             print("Please Login or Register\nIf you're registered, you need to login")
 
     def join_game(self):
+        """Joins user to an existing game with specified ID"""
         if self.username:
             self.game_id = int(input("Enter game ID to join: "))
             os.system('cls')
@@ -191,6 +211,7 @@ If you want to play on an unofficial server, Enter IP address of that server
 
 
     def view_board(self):
+        """Print an ASCII Picture of current game state including players pieces"""
         response = requests.post(f"{self.SERVER_URL}/view_board", json={"username": self.username, "game_id": self.game_id})
         data = response.json()
         if data["success"]:
@@ -203,6 +224,7 @@ If you want to play on an unofficial server, Enter IP address of that server
             return data["message"]
 
     def make_move(self):
+        """Interactively asks player for row and column of place where theirs' piece should be placed. Validated the move."""
         if self.game_id and self.username:
             x=None
             y=None
