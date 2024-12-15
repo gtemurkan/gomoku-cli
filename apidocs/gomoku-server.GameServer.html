@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>gomoku-server.GameServer</title>
+    <meta name="generator" content="pydoctor 24.11.1"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+    
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          gomoku/gomoku-server <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="gomoku-server.GameServer.html" class="internal-link" title="This class"><wbr></wbr>Game<wbr></wbr>Server</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#c_players_in_game" class="internal-link" title="gomoku-server.GameServer.c_players_in_game">c<wbr></wbr>_players<wbr></wbr>_in<wbr></wbr>_game</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#check_game_history" class="internal-link" title="gomoku-server.GameServer.check_game_history">check<wbr></wbr>_game<wbr></wbr>_history</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#check_winner" class="internal-link" title="gomoku-server.GameServer.check_winner">check<wbr></wbr>_winner</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#create_game" class="internal-link" title="gomoku-server.GameServer.create_game">create<wbr></wbr>_game</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#do_POST" class="internal-link" title="gomoku-server.GameServer.do_POST">do_<wbr></wbr>POST</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_ids_all_games" class="internal-link" title="gomoku-server.GameServer.get_ids_all_games">get<wbr></wbr>_ids<wbr></wbr>_all<wbr></wbr>_games</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#join_game" class="internal-link" title="gomoku-server.GameServer.join_game">join<wbr></wbr>_game</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#login_player" class="internal-link" title="gomoku-server.GameServer.login_player">login<wbr></wbr>_player</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_move" class="internal-link" title="gomoku-server.GameServer.make_move">make<wbr></wbr>_move</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#register_player" class="internal-link" title="gomoku-server.GameServer.register_player">register<wbr></wbr>_player</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#save_game_history" class="internal-link" title="gomoku-server.GameServer.save_game_history">save<wbr></wbr>_game<wbr></wbr>_history</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#send_json_response" class="internal-link" title="gomoku-server.GameServer.send_json_response">send<wbr></wbr>_json<wbr></wbr>_response</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#view_board" class="internal-link" title="gomoku-server.GameServer.view_board">view<wbr></wbr>_board</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#wait_move_second" class="internal-link" title="gomoku-server.GameServer.wait_move_second">wait<wbr></wbr>_move<wbr></wbr>_second</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="gomoku-server.html" class="internal-link" title="The parent of this class">gomoku-server</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku-server.GameServer.html" class="internal-link" title="gomoku-server.GameServer"><wbr></wbr>Game<wbr></wbr>Server</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku-server.html#save_data_game" class="internal-link" title="gomoku-server.save_data_game">save<wbr></wbr>_data<wbr></wbr>_game</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku-server.html#GAMES" class="internal-link" title="gomoku-server.GAMES">GAMES</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku-server.html#PORT" class="internal-link" title="gomoku-server.PORT">PORT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku-server.html#DATA_GAME" class="internal-link" title="gomoku-server.DATA_GAME">DATA<wbr></wbr>_GAME</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <div id="main" class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="gomoku-server.html" class="internal-link">gomoku-server</a></code><wbr></wbr>.<code><a href="gomoku-server.GameServer.html" class="internal-link" title="gomoku-server.GameServer">GameServer</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">GameServer</span>(BaseHTTPRequestHandler):</code></p>
+          <p><a href="classIndex.html#gomoku-server.GameServer">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Server class handling client requests for the Gomoku game.</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id4">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#c_players_in_game" class="internal-link" title="gomoku-server.GameServer.c_players_in_game">c<wbr></wbr>_players<wbr></wbr>_in<wbr></wbr>_game</a></code></td>
+    <td>Checks the number of players currently in a game.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#check_game_history" class="internal-link" title="gomoku-server.GameServer.check_game_history">check<wbr></wbr>_game<wbr></wbr>_history</a></code></td>
+    <td>Checks if specified game history exists and sends date to user.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#check_winner" class="internal-link" title="gomoku-server.GameServer.check_winner">check<wbr></wbr>_winner</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#create_game" class="internal-link" title="gomoku-server.GameServer.create_game">create<wbr></wbr>_game</a></code></td>
+    <td>Creates a new game and assigns a unique game ID.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#do_POST" class="internal-link" title="gomoku-server.GameServer.do_POST">do_<wbr></wbr>POST</a></code></td>
+    <td>Handles POST requests by routing them         to specific methods based on the endpoint.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_ids_all_games" class="internal-link" title="gomoku-server.GameServer.get_ids_all_games">get<wbr></wbr>_ids<wbr></wbr>_all<wbr></wbr>_games</a></code></td>
+    <td>Gives list of all games played by user.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#join_game" class="internal-link" title="gomoku-server.GameServer.join_game">join<wbr></wbr>_game</a></code></td>
+    <td>Adds a player to an existing game by game ID.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#login_player" class="internal-link" title="gomoku-server.GameServer.login_player">login<wbr></wbr>_player</a></code></td>
+    <td>Logs in an existing player by verifying credentials.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#make_move" class="internal-link" title="gomoku-server.GameServer.make_move">make<wbr></wbr>_move</a></code></td>
+    <td>Processes a player's move and updates the game state.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#register_player" class="internal-link" title="gomoku-server.GameServer.register_player">register<wbr></wbr>_player</a></code></td>
+    <td>Registers a new player with the provided username and password.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#save_game_history" class="internal-link" title="gomoku-server.GameServer.save_game_history">save<wbr></wbr>_game<wbr></wbr>_history</a></code></td>
+    <td>Saves games' history to corresponding txt-files.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#send_json_response" class="internal-link" title="gomoku-server.GameServer.send_json_response">send<wbr></wbr>_json<wbr></wbr>_response</a></code></td>
+    <td>Sends a JSON-formatted response to the client.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#view_board" class="internal-link" title="gomoku-server.GameServer.view_board">view<wbr></wbr>_board</a></code></td>
+    <td>Returns the current game board state.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#wait_move_second" class="internal-link" title="gomoku-server.GameServer.wait_move_second">wait<wbr></wbr>_move<wbr></wbr>_second</a></code></td>
+    <td>Makes client of one player to wait for move of another player.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="childList">
+          <div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.c_players_in_game">
+    
+  </a>
+  <a name="c_players_in_game">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">c_players_in_game</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#c_players_in_game" title="gomoku-server.GameServer.c_players_in_game">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Checks the number of players currently in a game.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.check_game_history">
+    
+  </a>
+  <a name="check_game_history">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">check_game_history</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#check_game_history" title="gomoku-server.GameServer.check_game_history">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Checks if specified game history exists and sends date to user.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.check_winner">
+    
+  </a>
+  <a name="check_winner">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">check_winner</span><span class="function-signature">(self, board, x, y)</span>:
+    
+    <a class="headerLink" href="#check_winner" title="gomoku-server.GameServer.check_winner">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.create_game">
+    
+  </a>
+  <a name="create_game">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">create_game</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#create_game" title="gomoku-server.GameServer.create_game">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Creates a new game and assigns a unique game ID.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.do_POST">
+    
+  </a>
+  <a name="do_POST">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">do_POST</span><span class="function-signature">(self)</span>:
+    
+    <a class="headerLink" href="#do_POST" title="gomoku-server.GameServer.do_POST">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handles POST requests by routing them         to specific methods based on the endpoint.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.get_ids_all_games">
+    
+  </a>
+  <a name="get_ids_all_games">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_ids_all_games</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#get_ids_all_games" title="gomoku-server.GameServer.get_ids_all_games">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Gives list of all games played by user.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.join_game">
+    
+  </a>
+  <a name="join_game">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">join_game</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#join_game" title="gomoku-server.GameServer.join_game">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Adds a player to an existing game by game ID.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.login_player">
+    
+  </a>
+  <a name="login_player">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">login_player</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#login_player" title="gomoku-server.GameServer.login_player">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Logs in an existing player by verifying credentials.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.make_move">
+    
+  </a>
+  <a name="make_move">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_move</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#make_move" title="gomoku-server.GameServer.make_move">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Processes a player's move and updates the game state.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.register_player">
+    
+  </a>
+  <a name="register_player">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">register_player</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#register_player" title="gomoku-server.GameServer.register_player">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Registers a new player with the provided username and password.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.save_game_history">
+    
+  </a>
+  <a name="save_game_history">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">save_game_history</span><span class="function-signature">(self, GAMES, game_id)</span>:
+    
+    <a class="headerLink" href="#save_game_history" title="gomoku-server.GameServer.save_game_history">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Saves games' history to corresponding txt-files.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.send_json_response">
+    
+  </a>
+  <a name="send_json_response">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">send_json_response</span><span class="function-signature">(self, response)</span>:
+    
+    <a class="headerLink" href="#send_json_response" title="gomoku-server.GameServer.send_json_response">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Sends a JSON-formatted response to the client.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.view_board">
+    
+  </a>
+  <a name="view_board">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">view_board</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#view_board" title="gomoku-server.GameServer.view_board">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Returns the current game board state.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="gomoku-server.GameServer.wait_move_second">
+    
+  </a>
+  <a name="wait_move_second">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">wait_move_second</span><span class="function-signature">(self, data)</span>:
+    
+    <a class="headerLink" href="#wait_move_second" title="gomoku-server.GameServer.wait_move_second">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Makes client of one player to wait for move of another player.</p></div>
+  </div>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container-fluid">
+    <a href="index.html">API Documentation</a> for gomoku/gomoku-server,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    24.11.1 at 2024-12-15 18:59:59.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

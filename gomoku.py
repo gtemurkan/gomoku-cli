@@ -27,6 +27,17 @@ class GomokuClient:
         self.game_id = None
         self.SERVER_URL = None
         self.NUM_ROW = "".join(f"{str(ic):3}" for ic in range(1, 20))
+        
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        del state[
+            'data',
+            'username',
+            'game_id',
+            'SERVER_URL',
+            'NUM_ROW'
+        ]
+        return state
 
     def slogan_gomoku(self):
         """Displays the ASCII art slogan of the game."""
