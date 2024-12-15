@@ -1,9 +1,9 @@
-For client:
+For gomoku:
 	requests
 	time
 	os
 	re
-For server:
+For gomoku-server:
 	http.server
 	json
 	os
