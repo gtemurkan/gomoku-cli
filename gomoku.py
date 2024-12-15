@@ -32,7 +32,7 @@ class GomokuClient:
     def get_server(self):
         """Interactively asks user for server url"""
         IP_PATTERN = (r"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}"
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" "{1}$")
+                        r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" "{1}$")
         while True:
             ans_server_url = input('''
 To play on a local network, Enter word: <local>
@@ -41,7 +41,7 @@ If you want to play on an unofficial server, Enter IP address of that server
     command: ''')
 
             if ans_server_url in ["server", "<server>"]:
-                self.SERVER_URL = "http://localhost:8080"
+                self.SERVER_URL = "http://109.196.98.96:8080"
                 break
             if ans_server_url in ["local", "<local>"]:
                 self.SERVER_URL = "http://localhost:8080"
