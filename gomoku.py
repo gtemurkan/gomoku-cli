@@ -230,8 +230,8 @@ If you want to play on an unofficial server, Enter IP address of that server
                 else:
                     c_wainting = 1
                     while True:
-                        print(f'Wait {2.5*(c_wainting)} seconds for second user')
-                        time.sleep(2.5*c_wainting)
+                        print(f'Wait {2*(c_wainting)} seconds for second user')
+                        time.sleep(2*c_wainting)
                         response = requests.post(f"{self.SERVER_URL}/wait_move_second", json={"username": self.username, "game_id": self.game_id})
                         data = response.json()
                         if data["success"]:
