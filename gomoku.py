@@ -251,6 +251,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                             if c_wainting % 6 == 0:
                                 want_exit = input("Second user hasn't made a move yet\nIf you want to continue waiting write <cont>\nIf you wait exit write <exit>\n command: ")
                                 if want_exit in ["<cont>", "cont"]:
+                                    c_wainting += 1
                                     os.system('cls')
                                     continue
                                 if want_exit in ["<exit>", "exit"]:

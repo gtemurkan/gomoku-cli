@@ -217,13 +217,22 @@ class GameServer(BaseHTTPRequestHandler):
         game["turn"] = game["players"][1] if game["turn"] == game["players"][0] else game["players"][0]
 
         # Проверка победителя
-        if self.check_winner(game["board"], x, y):
+        check_res_game=self.check_winner(game["board"], x, y)
+        if check_res_game == "draw":
+            game["winner"] = f'{game["players"][0]} and {game["players"][1]}'
+        elif check_res_game:
             game["winner"] = username
 
         self.save_game_history(GAMES,game_id)
         self.send_json_response({"success": True, "board": game["board"], "winner": game["winner"]})
 
     def check_winner(self, board, x, y):
+        c_zero_sym=0
+        for i in board:
+            c_zero_sym+=i.count("~")
+        if c_zero_sym==0:
+            return "draw"
+
         def check_direction(dx, dy):
             count = 1
             for direction in (-1, 1):
