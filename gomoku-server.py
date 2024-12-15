@@ -5,11 +5,10 @@ Gomoku Server Implementation
 
 This module provides a server-side implementation of the Gomoku game.
 It supports:
-
-1. Connecting players
-2. Registering and logging in users
-3. Creating and managing games
-4. Managing game history
+    1. Connecting players
+    2. Registering and logging in users
+    3. Creating and managing games
+    4. Managing game history
 """
 
 from http.server import BaseHTTPRequestHandler, HTTPServer

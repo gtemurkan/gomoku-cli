@@ -8,7 +8,7 @@ class TestGomokuClient(unittest.TestCase):
 
     def setUp(self):
         self.client = GomokuClient()
-        self.client.SERVER_URL = "http://testserver"
+        self.client.__SERVER_URL = "http://testserver"
 
     @patch('requests.post')
     def test_register_success(self, mock_post):
@@ -44,7 +44,7 @@ class TestGomokuClient(unittest.TestCase):
         }
         with patch('builtins.input', side_effect=["testuser", "testpass"]):
             self.client.login()
-        self.assertEqual(self.client.username, "testuser")
+        self.assertEqual(self.client.__username, "testuser")
         mock_post.assert_called_with(
             "http://testserver/login",
             json={"username": "testuser", "password": "testpass"}
@@ -58,7 +58,7 @@ class TestGomokuClient(unittest.TestCase):
         }
         with patch('builtins.input', side_effect=["wronguser", "wrongpass"]):
             self.client.login()
-        self.assertIsNone(self.client.username)
+        self.assertIsNone(self.client.__username)
         mock_post.assert_called_with(
             "http://testserver/login",
             json={"username": "wronguser", "password": "wrongpass"}
@@ -69,7 +69,7 @@ class TestGomokuClient(unittest.TestCase):
         mock_post.return_value.json.return_value = {
             "success": True, "game_id": 1
         }
-        self.client.username = "testuser"
+        self.client.__username = "testuser"
         self.client.create_game()
         mock_post.assert_called_with(
             "http://testserver/create_game",
@@ -81,7 +81,7 @@ class TestGomokuClient(unittest.TestCase):
         mock_post.return_value.json.return_value = {
             "success": True, "games": [1, 2, 3]
         }
-        self.client.username = "testuser"
+        self.client.__username = "testuser"
         self.client.get_ids_all_games()
         mock_post.assert_called_with(
             "http://testserver/get_ids_all_games",
@@ -93,7 +93,7 @@ class TestGomokuClient(unittest.TestCase):
         mock_post.return_value.json.return_value = {
             "success": False, "message": "Invalid username."
         }
-        self.client.username = "unknownuser"
+        self.client.__username = "unknownuser"
         self.client.get_ids_all_games()
         mock_post.assert_called_with(
             "http://testserver/get_ids_all_games",
