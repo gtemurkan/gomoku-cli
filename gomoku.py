@@ -1,3 +1,5 @@
+# gomoku.py
+
 """
 Gomoku Client Implementation
 
@@ -17,16 +19,24 @@ import re
 
 
 class GomokuClient:
-    """Client class for interacting with the Gomoku game server."""
+    """
+    Client class for interacting with the Gomoku game server.
+    
+    Attributes:
+    
+    """
 
     def __init__(self):
         """
         Initializes the client with default values,
         such as username and server URL.
         """
-        self.__username = None
-        self.__game_id = None
-        self.__SERVER_URL = None
+        self.username = None
+        """For internal use"""
+        self.game_id = None
+        """For internal use"""
+        self.SERVER_URL = None
+        """For internal use"""
         self.__NUM_ROW = "".join(f"{str(ic):3}" for ic in range(1, 20))
 
     def slogan_gomoku(self):
@@ -60,13 +70,13 @@ If you want to play on an unofficial server, Enter IP address of that server
     command: ''')
 
             if ans_server_url in ["server", "<server>"]:
-                self.__SERVER_URL = "http://109.196.98.96:8080"
+                self.SERVER_URL = "http://109.196.98.96:8080"
                 break
             if ans_server_url in ["local", "<local>"]:
-                self.__SERVER_URL = "http://localhost:8080"
+                self.SERVER_URL = "http://localhost:8080"
                 break
             if bool(re.match(IP_PATTERN, ans_server_url)):
-                self.__SERVER_URL = ans_server_url
+                self.SERVER_URL = ans_server_url
                 break
             else:
                 print("BAD VALUE")
@@ -77,7 +87,7 @@ If you want to play on an unofficial server, Enter IP address of that server
         username = input("Enter username: ")
         password = input("Enter password: ")
         response = requests.post(
-            f"{self.__SERVER_URL}/register",
+            f"{self.SERVER_URL}/register",
             json={"username": username, "password": password}
         )
         print(response.json()["message"])
@@ -91,19 +101,19 @@ If you want to play on an unofficial server, Enter IP address of that server
         username = input("Enter username: ")
         password = input("Enter password: ")
         response = requests.post(
-            f"{self.__SERVER_URL}/login",
+            f"{self.SERVER_URL}/login",
             json={"username": username, "password": password}
         )
         if response.json()["success"]:
-            self.__username = username
+            self.username = username
         print(response.json()["message"])
 
     def get_ids_all_games(self):
         """Displays ids of all games user played"""
-        if self.__username:
+        if self.username:
             response = requests.post(
-                f"{self.__SERVER_URL}/get_ids_all_games",
-                json={"username": self.__username}
+                f"{self.SERVER_URL}/get_ids_all_games",
+                json={"username": self.username}
             )
             if response.json()["success"]:
                 os.system('cls')
@@ -123,10 +133,10 @@ If you want to play on an unofficial server, Enter IP address of that server
         Creates a new game session and
         retrieves its game ID from the server.
         """
-        if self.__username:
+        if self.username:
             response = requests.post(
-                f"{self.__SERVER_URL}/create_game",
-                json={"username": self.__username}
+                f"{self.SERVER_URL}/create_game",
+                json={"username": self.username}
             )
             if response.json()["success"]:
                 os.system('cls')
@@ -146,15 +156,15 @@ If you want to play on an unofficial server, Enter IP address of that server
         Interactively shows which moves were
         made in selected game. Player may choose specific moves.
         """
-        if self.__username:
+        if self.username:
             os.system('cls')
-            self.__game_id = input(
+            self.game_id = input(
                 "Enter the number of the game you are "
                 "interested in, in which you participated: "
             )
             response = requests.post(
-                f"{self.__SERVER_URL}/check_game_history",
-                json={"username": self.__username, "game_id": self.__game_id}
+                f"{self.SERVER_URL}/check_game_history",
+                json={"username": self.username, "game_id": self.game_id}
             )
             if response.json()["success"]:
 
@@ -189,13 +199,13 @@ If you want to play on an unofficial server, Enter IP address of that server
 
     def join_game(self):
         """Joins user to an existing game with specified ID"""
-        if self.__username:
-            self.__game_id = int(input("Enter game ID to join: "))
+        if self.username:
+            self.game_id = int(input("Enter game ID to join: "))
             os.system('cls')
             response = requests.post(
-                f"{self.__SERVER_URL}/join_game",
-                json={"username": self.__username,
-                      "game_id": self.__game_id}
+                f"{self.SERVER_URL}/join_game",
+                json={"username": self.username,
+                      "game_id": self.game_id}
             )
             print(response.json()["message"])
             c_wainting = 1
@@ -203,18 +213,18 @@ If you want to play on an unofficial server, Enter IP address of that server
                 print(f'Wait 10 seconds for second user')
                 time.sleep(10)
                 response = requests.post(
-                    f"{self.__SERVER_URL}/c_players_in_game",
-                    json={"game_id": self.__game_id}
+                    f"{self.SERVER_URL}/c_players_in_game",
+                    json={"game_id": self.game_id}
                 )
                 data = response.json()
                 if data["success"]:
                     for p in data["players"]:
-                        if p != self.__username:
+                        if p != self.username:
                             opponent = p
                             break
                     os.system('cls')
                     print(f'You and {opponent} in the game')
-                    if data["turn"] == self.__username:
+                    if data["turn"] == self.username:
                         print("Your turn\nLet's make  move")
                     else:
                         print("Not your turn\nLet's wait opponent's move")
@@ -224,9 +234,9 @@ If you want to play on an unofficial server, Enter IP address of that server
                                   'seconds for second user')
                             time.sleep(2.5*c_wainting)
                             response = requests.post(
-                                f"{self.__SERVER_URL}/wait_move_second",
-                                json={"username": self.__username,
-                                      "game_id": self.__game_id}
+                                f"{self.SERVER_URL}/wait_move_second",
+                                json={"username": self.username,
+                                      "game_id": self.game_id}
                             )
                             data = response.json()
                             if data["success"]:
@@ -280,9 +290,9 @@ If you want to play on an unofficial server, Enter IP address of that server
         game state including players pieces
         """
         response = requests.post(
-            f"{self.__SERVER_URL}/view_board",
-            json={"username": self.__username,
-                  "game_id": self.__game_id}
+            f"{self.SERVER_URL}/view_board",
+            json={"username": self.username,
+                  "game_id": self.game_id}
         )
         data = response.json()
         if data["success"]:
@@ -300,7 +310,7 @@ If you want to play on an unofficial server, Enter IP address of that server
         column of place where theirs' piece should
         be placed. Validated the move.
         """
-        if self.__game_id and self.__username:
+        if self.game_id and self.username:
             x = None
             y = None
             res_view = GomokuClient.view_board(self)
@@ -309,21 +319,21 @@ If you want to play on an unofficial server, Enter IP address of that server
                     x = int(input("Enter row (1-19): "))
                     y = int(input("Enter column (1-19): "))
                     response = requests.post(
-                        f"{self.__SERVER_URL}/make_move",
-                        json={"username": self.__username,
-                              "game_id": self.__game_id, "x": x-1, "y": y-1}
+                        f"{self.SERVER_URL}/make_move",
+                        json={"username": self.username,
+                              "game_id": self.game_id, "x": x-1, "y": y-1}
                     )
                 except:
                     response = requests.post(
-                        f"{self.__SERVER_URL}/make_move",
-                        json={"username": self.__username,
-                              "game_id": self.__game_id, "x": x, "y": y}
+                        f"{self.SERVER_URL}/make_move",
+                        json={"username": self.username,
+                              "game_id": self.game_id, "x": x, "y": y}
                     )
             else:
                 response = requests.post(
-                    f"{self.__SERVER_URL}/make_move",
-                    json={"username": self.__username,
-                          "game_id": self.__game_id, "x": x, "y": y}
+                    f"{self.SERVER_URL}/make_move",
+                    json={"username": self.username,
+                          "game_id": self.game_id, "x": x, "y": y}
                 )
             data = response.json()
             if data["success"]:
@@ -342,9 +352,9 @@ If you want to play on an unofficial server, Enter IP address of that server
                         print(f'Wait {2*(c_wainting)} seconds for second user')
                         time.sleep(2*c_wainting)
                         response = requests.post(
-                            f"{self.__SERVER_URL}/wait_move_second",
-                            json={"username": self.__username,
-                                  "game_id": self.__game_id}
+                            f"{self.SERVER_URL}/wait_move_second",
+                            json={"username": self.username,
+                                  "game_id": self.game_id}
                         )
                         data = response.json()
                         if data["success"]:
@@ -379,7 +389,7 @@ If you want to play on an unofficial server, Enter IP address of that server
             else:
                 os.system('cls')
                 print(data["message"])
-        elif self.__username:
+        elif self.username:
             os.system('cls')
             print("Please join game (point 4)")
         else:

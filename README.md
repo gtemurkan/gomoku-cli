@@ -29,14 +29,14 @@ python3 gomoku.py
 Custom server
 -------------
 
-For games on custom server **gomoku-server.py** module is required.
+For games on custom server **gomoku_server.py** module is required.
 
 Launch on Windows:
 ```
-py gomoku-server.py
+py gomoku_server.py
 ```
 
 Mac/Unix:
 ```
-python3 gomoku-server.py
+python3 gomoku_server.py
 ```
