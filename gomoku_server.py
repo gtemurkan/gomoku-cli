@@ -12,6 +12,7 @@ It supports:
 """
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import socket
 import json
 import os
 
@@ -362,11 +363,15 @@ class GameServer(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    server_address = input(
-        "Input ip_address server\n"
-        "For local game input word: localhost\n"
-        "\tcommand: "
-    )
-    server = HTTPServer((server_address, PORT), GameServer)
-    print(f"Server running on port {PORT}...")
-    server.serve_forever()
+    while True:
+        server_address = input(
+            "Input ip_address server\n"
+            "For local game input word: localhost\n"
+            "\tcommand: "
+        )
+        try:
+            server = HTTPServer((server_address, PORT), GameServer)
+            print(f"Server running on port {PORT}...")
+            server.serve_forever()
+        except socket.gaierror as e:
+            print("Failed. Try again")
