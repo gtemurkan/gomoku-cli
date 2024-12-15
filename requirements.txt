@@ -6,4 +6,5 @@ For gomoku:
 For gomoku-server:
 	http.server
 	json
+	ssl
 	os
