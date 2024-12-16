@@ -39,7 +39,7 @@ def save_data_game():
     with open("data_game.json", "w") as f:
         json.dump(DATA_GAME, f)
 
-#Была заимствована структура класса для общения клиента с сервером
+#Была заимствована структура класса для общения клиента с сервером - начало
 class GameServer(BaseHTTPRequestHandler):
     """Server class handling client requests for the Gomoku game."""
    
@@ -68,6 +68,7 @@ class GameServer(BaseHTTPRequestHandler):
             endpoints[self.path](data)
         else:
             self.send_error(404, "Endpoint not found")
+# Была заимствована структура класса для общения клиента с сервером - конец
 
     def get_ids_all_games(self, data):
         """Gives list of all games played by user."""
@@ -133,13 +134,14 @@ class GameServer(BaseHTTPRequestHandler):
                             u'double-check the data')
             })
             return
-    #! Был заимствован синтаксис функции, отвечающей за отправку запроса
+    #Был заимствован синтаксис функции, отвечающей за отправку запроса - начало
     def send_json_response(self, response):
         """Sends a JSON-formatted response to the client."""
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(response).encode("utf-8"))
+    # Был заимствован синтаксис функции, отвечающей за отправку запроса - конец
 
     def register_player(self, data):
         """Registers a new player with the provided username and password."""
@@ -332,7 +334,7 @@ class GameServer(BaseHTTPRequestHandler):
             "board": game["board"],
             "winner": game["winner"]
         })
-    #! Была заимствована и серьезно доработана функция поиска победителя
+
     def check_winner(self, board, x, y):
         c_zero_sym = 0
         for i in board:
@@ -369,8 +371,9 @@ if __name__ == "__main__":
         "For local game input word: localhost\n"
         "\tcommand: "
     )
-    #! Была заимствована настройка ssl
+
     try:
+        # Была заимствована настройка ssl - начало
         server = HTTPServer((server_address, PORT), GameServer)
         # Создание SSLContext и настройка SSL
         context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
@@ -378,6 +381,8 @@ if __name__ == "__main__":
 
         # Применение SSLContext к сокету сервера
         server.socket = context.wrap_socket(server.socket, server_side=True)
+        # Была заимствована настройка ssl - конец
+
         print(f"Server running on port {PORT}...")
         server.serve_forever()
     except socket.gaierror as e:

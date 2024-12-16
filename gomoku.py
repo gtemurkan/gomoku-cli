@@ -82,7 +82,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                 break
             else:
                 print("BAD VALUE")
-
+    #Был заимствован пример функции для класса GomokuClient - начало
     def register(self):
         """Registers a new user by sending their credentials to the server."""
         os.system('cls')
@@ -94,6 +94,7 @@ If you want to play on an unofficial server, Enter IP address of that server
             verify=False
         )
         print(response.json()["message"])
+    # Был заимствован пример функции для класса GomokuClient - конец
 
     def login(self):
         """
