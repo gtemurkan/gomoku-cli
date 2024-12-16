@@ -1,10 +1,1 @@
-For gomoku.py:
-	pytest
-	requests
-	time
-	re
-For gomoku_server.py:
-	pytest
-	http.server
-	json
-	ssl
+Requests==2.32.3
