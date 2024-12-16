@@ -1,8 +1,10 @@
-For gomoku:
+For gomoku.py:
+	pytest
 	requests
 	time
 	re
-For gomoku_server:
+For gomoku_server.py:
+	pytest
 	http.server
 	json
 	ssl
