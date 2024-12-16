@@ -44,7 +44,6 @@ Then you can launch server.
 
 Launch on Windows:
 ```
-py 
 py gomoku_server.py
 ```
 
