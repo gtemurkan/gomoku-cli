@@ -14,9 +14,10 @@ It supports:
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import socket
 import json
+import ssl
 import os
 
-PORT = 8080
+PORT = 8443
 
 GAMES = {}
 DATA_GAME = {}
@@ -363,15 +364,20 @@ class GameServer(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    while True:
-        server_address = input(
-            "Input ip_address server\n"
-            "For local game input word: localhost\n"
-            "\tcommand: "
-        )
-        try:
-            server = HTTPServer((server_address, PORT), GameServer)
-            print(f"Server running on port {PORT}...")
-            server.serve_forever()
-        except socket.gaierror as e:
-            print("Failed. Try again")
+    server_address = input(
+        "Input ip_address server\n"
+        "For local game input word: localhost\n"
+        "\tcommand: "
+    )
+    try:
+        server = HTTPServer((server_address, PORT), GameServer)
+        # Создание SSLContext и настройка SSL
+        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        context.load_cert_chain(certfile="ssl_cert/server.crt", keyfile="ssl_cert/server.key")
+
+        # Применение SSLContext к сокету сервера
+        server.socket = context.wrap_socket(server.socket, server_side=True)
+        print(f"Server running on port {PORT}...")
+        server.serve_forever()
+    except socket.gaierror as e:
+        print('Failed. Try again')

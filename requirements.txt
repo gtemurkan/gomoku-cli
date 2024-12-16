@@ -1,9 +1,8 @@
 For gomoku:
 	requests
 	time
-	os
 	re
-For gomoku-server:
+For gomoku_server:
 	http.server
 	json
-	os
+	ssl
