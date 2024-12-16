@@ -30,13 +30,28 @@ Custom server
 -------------
 
 For games on custom server **gomoku_server.py** module is required.
+You need to generate ssl_cert first.
+OpenSSL lib must be installed on your system.
+
+then generate certificate using:
+```
+py ssl_cert.py # Windows
+
+python3 ssl_cert.py # Unix/Mac
+```
+
+Then you can launch server.
 
 Launch on Windows:
 ```
+py 
 py gomoku_server.py
 ```
 
 Mac/Unix:
 ```
+cd ssl_cert
+python3 ssl_cert.py # You need to generate ssl_cert first
+cd ..
 python3 gomoku_server.py
 ```

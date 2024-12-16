@@ -87,11 +87,11 @@ class GameServer(BaseHTTPRequestHandler):
         """Saves games' history to corresponding txt-files."""
         for user in GAMES[game_id]["players"]:
             with open(
-                        f'GAMES_HISTORY/'
-                        f'Game_{game_id}_{user}.txt',
-                        "a+",
-                        encoding="utf-8"
-                    ) as f:
+                f'GAMES_HISTORY/'
+                f'Game_{game_id}_{user}.txt',
+                "a+",
+                encoding="utf-8"
+            ) as f:
                 f.write(
                     f'PLAYERS: {GAMES[game_id]["players"][0]} - ○ ;'
                     f'{GAMES[game_id]["players"][1]} - ●\n'
@@ -373,7 +373,8 @@ if __name__ == "__main__":
         server = HTTPServer((server_address, PORT), GameServer)
         # Создание SSLContext и настройка SSL
         context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        context.load_cert_chain(certfile="ssl_cert/server.crt", keyfile="ssl_cert/server.key")
+        context.load_cert_chain(
+            certfile="ssl_cert/server.crt", keyfile="ssl_cert/server.key")
 
         # Применение SSLContext к сокету сервера
         server.socket = context.wrap_socket(server.socket, server_side=True)
