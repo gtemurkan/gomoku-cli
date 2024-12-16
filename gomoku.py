@@ -69,11 +69,13 @@ To play on the official server, Enter word: <server>
 If you want to play on an unofficial server, Enter IP address of that server
     command: ''')
 
+            requests.packages.urllib3.disable_warnings()
+
             if ans_server_url in ["server", "<server>"]:
-                self.SERVER_URL = "http://109.196.98.96:8080"
+                self.SERVER_URL = "https://109.196.98.96:8443"
                 break
             if ans_server_url in ["local", "<local>"]:
-                self.SERVER_URL = "http://localhost:8080"
+                self.SERVER_URL = "https://localhost:8443"
                 break
             if bool(re.match(IP_PATTERN, ans_server_url)):
                 self.SERVER_URL = ans_server_url
@@ -88,7 +90,8 @@ If you want to play on an unofficial server, Enter IP address of that server
         password = input("Enter password: ")
         response = requests.post(
             f"{self.SERVER_URL}/register",
-            json={"username": username, "password": password}
+            json={"username": username, "password": password},
+            verify=False
         )
         print(response.json()["message"])
 
@@ -102,7 +105,8 @@ If you want to play on an unofficial server, Enter IP address of that server
         password = input("Enter password: ")
         response = requests.post(
             f"{self.SERVER_URL}/login",
-            json={"username": username, "password": password}
+            json={"username": username, "password": password},
+            verify=False
         )
         if response.json()["success"]:
             self.username = username
@@ -113,7 +117,8 @@ If you want to play on an unofficial server, Enter IP address of that server
         if self.username:
             response = requests.post(
                 f"{self.SERVER_URL}/get_ids_all_games",
-                json={"username": self.username}
+                json={"username": self.username},
+                verify=False
             )
             if response.json()["success"]:
                 os.system('cls')
@@ -136,7 +141,8 @@ If you want to play on an unofficial server, Enter IP address of that server
         if self.username:
             response = requests.post(
                 f"{self.SERVER_URL}/create_game",
-                json={"username": self.username}
+                json={"username": self.username},
+                verify=False
             )
             if response.json()["success"]:
                 os.system('cls')
@@ -164,7 +170,8 @@ If you want to play on an unofficial server, Enter IP address of that server
             )
             response = requests.post(
                 f"{self.SERVER_URL}/check_game_history",
-                json={"username": self.username, "game_id": self.game_id}
+                json={"username": self.username, "game_id": self.game_id},
+                verify=False
             )
             if response.json()["success"]:
 
@@ -205,16 +212,18 @@ If you want to play on an unofficial server, Enter IP address of that server
             response = requests.post(
                 f"{self.SERVER_URL}/join_game",
                 json={"username": self.username,
-                      "game_id": self.game_id}
+                      "game_id": self.game_id},
+                verify=False
             )
             print(response.json()["message"])
-            c_wainting = 1
+            c_waiting = 1
             while True:
                 print(f'Wait 10 seconds for second user')
                 time.sleep(10)
                 response = requests.post(
                     f"{self.SERVER_URL}/c_players_in_game",
-                    json={"game_id": self.game_id}
+                    json={"game_id": self.game_id},
+                    verify=False
                 )
                 data = response.json()
                 if data["success"]:
@@ -228,15 +237,16 @@ If you want to play on an unofficial server, Enter IP address of that server
                         print("Your turn\nLet's make  move")
                     else:
                         print("Not your turn\nLet's wait opponent's move")
-                        c_wainting = 1
+                        c_waiting = 1
                         while True:
-                            print(f'Wait {2.5 * c_wainting}'
+                            print(f'Wait {2 * c_waiting}'
                                   'seconds for second user')
-                            time.sleep(2.5*c_wainting)
+                            time.sleep(2*c_waiting)
                             response = requests.post(
                                 f"{self.SERVER_URL}/wait_move_second",
                                 json={"username": self.username,
-                                      "game_id": self.game_id}
+                                      "game_id": self.game_id},
+                                verify=False
                             )
                             data = response.json()
                             if data["success"]:
@@ -244,7 +254,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                                 print(f'Your opponent has made a move.')
                                 break
                             else:
-                                if c_wainting % 6 == 0:
+                                if c_waiting % 6 == 0:
                                     os.system('cls')
                                     want_exit = input(
                                         "Second user hasn't made a move yet\n"
@@ -252,6 +262,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                                         "write <cont>\nIf you wait exit "
                                         "write <exit>\n command: ")
                                     if want_exit in ["<cont>", "cont"]:
+                                        c_waiting=1
                                         continue
                                     elif want_exit in ["<exit>", "exit"]:
                                         os.system('cls')
@@ -259,9 +270,9 @@ If you want to play on an unofficial server, Enter IP address of that server
                                     else:
                                         print("Write only <cont> or <exit>")
                                 else:
-                                    c_wainting += 1
+                                    c_waiting += 1
                     break
-                elif c_wainting % 6 == 0:
+                elif c_waiting % 6 == 0:
                     os.system('cls')
                     want_exit = input(
                         "Second user not connected yet\n"
@@ -269,7 +280,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                         "If you wait exit write <exit>\n command: "
                     )
                     if want_exit in ["<cont>", "cont"]:
-
+                        c_waiting=1
                         continue
                     elif want_exit in ["<exit>", "exit"]:
                         os.system('cls')
@@ -277,7 +288,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                     else:
                         print("Write only <cont> or <exit>")
                 else:
-                    c_wainting += 1
+                    c_waiting += 1
 
         else:
             os.system('cls')
@@ -292,7 +303,8 @@ If you want to play on an unofficial server, Enter IP address of that server
         response = requests.post(
             f"{self.SERVER_URL}/view_board",
             json={"username": self.username,
-                  "game_id": self.game_id}
+                  "game_id": self.game_id},
+            verify=False
         )
         data = response.json()
         if data["success"]:
@@ -321,19 +333,22 @@ If you want to play on an unofficial server, Enter IP address of that server
                     response = requests.post(
                         f"{self.SERVER_URL}/make_move",
                         json={"username": self.username,
-                              "game_id": self.game_id, "x": x-1, "y": y-1}
+                              "game_id": self.game_id, "x": x-1, "y": y-1},
+                        verify=False
                     )
                 except:
                     response = requests.post(
                         f"{self.SERVER_URL}/make_move",
                         json={"username": self.username,
-                              "game_id": self.game_id, "x": x, "y": y}
+                              "game_id": self.game_id, "x": x, "y": y},
+                        verify=False
                     )
             else:
                 response = requests.post(
                     f"{self.SERVER_URL}/make_move",
                     json={"username": self.username,
-                          "game_id": self.game_id, "x": x, "y": y}
+                          "game_id": self.game_id, "x": x, "y": y},
+                    verify=False
                 )
             data = response.json()
             if data["success"]:
@@ -347,14 +362,15 @@ If you want to play on an unofficial server, Enter IP address of that server
                     for _ in range(3):
                         print(f"Winner: {data['winner']}")
                 else:
-                    c_wainting = 1
+                    c_waiting = 1
                     while True:
-                        print(f'Wait {2*(c_wainting)} seconds for second user')
-                        time.sleep(2*c_wainting)
+                        print(f'Wait {2*(c_waiting)} seconds for second user')
+                        time.sleep(2*c_waiting)
                         response = requests.post(
                             f"{self.SERVER_URL}/wait_move_second",
                             json={"username": self.username,
-                                  "game_id": self.game_id}
+                                  "game_id": self.game_id},
+                            verify=False
                         )
                         data = response.json()
                         if data["success"]:
@@ -372,20 +388,20 @@ If you want to play on an unofficial server, Enter IP address of that server
                                 print(f'Your opponent has made a move.')
                             break
                         else:
-                            if c_wainting % 6 == 0:
+                            if c_waiting % 6 == 0:
                                 want_exit = input(
                                     "Second user hasn't made a move yet\n"
                                     "If you want to continue waiting write "
                                     "<cont>\nIf you wait exit write <exit>\n "
                                     "command: ")
                                 if want_exit in ["<cont>", "cont"]:
-                                    c_wainting += 1
+                                    c_waiting = 1
                                     os.system('cls')
                                     continue
                                 if want_exit in ["<exit>", "exit"]:
                                     os.system('cls')
                                     break
-                            c_wainting += 1
+                            c_waiting += 1
             else:
                 os.system('cls')
                 print(data["message"])
