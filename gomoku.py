@@ -208,11 +208,6 @@ If you want to play on an unofficial server, Enter IP address of that server
             print("Please Login or Register\n"
                   "If you're registered, you need to login")
 
-    def __hashed_password(self, password: str):
-        res = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-        res = res.decode()
-        return res
-
     def join_game(self):
         """Joins user to an existing game with specified ID"""
         if self.username:
