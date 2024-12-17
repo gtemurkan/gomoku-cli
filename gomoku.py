@@ -21,9 +21,9 @@ import re
 class GomokuClient:
     """
     Client class for interacting with the Gomoku game server.
-    
+
     Attributes:
-    
+
     """
 
     def __init__(self):
@@ -82,7 +82,8 @@ If you want to play on an unofficial server, Enter IP address of that server
                 break
             else:
                 print("BAD VALUE")
-    #Был заимствован пример функции для класса GomokuClient - начало
+    # Был заимствован пример функции для класса GomokuClient - начало
+
     def register(self):
         """Registers a new user by sending their credentials to the server."""
         os.system('cls')
@@ -263,7 +264,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                                         "write <cont>\nIf you wait exit "
                                         "write <exit>\n command: ")
                                     if want_exit in ["<cont>", "cont"]:
-                                        c_waiting=1
+                                        c_waiting = 1
                                         continue
                                     elif want_exit in ["<exit>", "exit"]:
                                         os.system('cls')
@@ -281,7 +282,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                         "If you wait exit write <exit>\n command: "
                     )
                     if want_exit in ["<cont>", "cont"]:
-                        c_waiting=1
+                        c_waiting = 1
                         continue
                     elif want_exit in ["<exit>", "exit"]:
                         os.system('cls')
@@ -379,7 +380,8 @@ If you want to play on an unofficial server, Enter IP address of that server
                                 os.system('cls')
                                 print(f'{" " * 4} {self.__NUM_ROW}')
                                 for row in range(len(data["board"])):
-                                    print(f'{row + 1:3}| {"  ".join(data["board"][row])}')
+                                    print(
+                                        f'{row + 1:3}| {"  ".join(data["board"][row])}')
                                 for _ in range(3):
                                     print(f"Winner: {data['winner']}")
 

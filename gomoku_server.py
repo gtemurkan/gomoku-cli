@@ -39,10 +39,12 @@ def save_data_game():
     with open("data_game.json", "w") as f:
         json.dump(DATA_GAME, f)
 
-#Была заимствована структура класса для общения клиента с сервером - начало
+# Была заимствована структура класса для общения клиента с сервером - начало
+
+
 class GameServer(BaseHTTPRequestHandler):
     """Server class handling client requests for the Gomoku game."""
-   
+
     def do_POST(self):
         """Handles POST requests by routing them \
         to specific methods based on the endpoint."""
@@ -134,7 +136,8 @@ class GameServer(BaseHTTPRequestHandler):
                             u'double-check the data')
             })
             return
-    #Был заимствован синтаксис функции, отвечающей за отправку запроса - начало
+    # Был заимствован синтаксис функции, отвечающей за отправку запроса - начало
+
     def send_json_response(self, response):
         """Sends a JSON-formatted response to the client."""
         self.send_response(200)
@@ -377,7 +380,8 @@ if __name__ == "__main__":
         server = HTTPServer((server_address, PORT), GameServer)
         # Создание SSLContext и настройка SSL
         context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        context.load_cert_chain(certfile="ssl_cert/server.crt", keyfile="ssl_cert/server.key")
+        context.load_cert_chain(
+            certfile="ssl_cert/server.crt", keyfile="ssl_cert/server.key")
 
         # Применение SSLContext к сокету сервера
         server.socket = context.wrap_socket(server.socket, server_side=True)
