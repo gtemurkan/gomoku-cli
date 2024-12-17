@@ -20,7 +20,18 @@ import os
 PORT = 8443
 
 GAMES = {}
+"""
+History of every game is saved GAMES_HISTORY directory.
+At program start it loads to GAMES variable. After program
+stops it loads back to directory.
+"""
 DATA_GAME = {}
+"""
+Stores users data, which includes:
+    - username
+    - password
+    - games IDs user played
+"""
 
 # Load game data from a file if it exists
 try:
