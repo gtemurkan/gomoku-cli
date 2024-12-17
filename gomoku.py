@@ -82,18 +82,20 @@ If you want to play on an unofficial server, Enter IP address of that server
                 break
             else:
                 print("BAD VALUE")
-    # Был заимствован пример функции для класса GomokuClient - начало
 
+    # Был заимствован пример функции для класса GomokuClient - начало
     def register(self):
         """Registers a new user by sending their credentials to the server."""
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
+        print(f"[!] {self.SERVER_URL}/register")
         response = requests.post(
             f"{self.SERVER_URL}/register",
             json={"username": username, "password": password},
             verify=False
         )
+        print(response.json()["message"])
         print(response.json()["message"])
     # Был заимствован пример функции для класса GomokuClient - конец
 

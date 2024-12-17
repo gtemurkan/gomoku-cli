@@ -39,9 +39,8 @@ def save_data_game():
     with open("data_game.json", "w") as f:
         json.dump(DATA_GAME, f)
 
+
 # Была заимствована структура класса для общения клиента с сервером - начало
-
-
 class GameServer(BaseHTTPRequestHandler):
     """Server class handling client requests for the Gomoku game."""
 
@@ -136,8 +135,8 @@ class GameServer(BaseHTTPRequestHandler):
                             u'double-check the data')
             })
             return
-    # Был заимствован синтаксис функции, отвечающей за отправку запроса - начало
 
+    # Был заимствован синтаксис функции, отвечающей за отправку запроса - начало
     def send_json_response(self, response):
         """Sends a JSON-formatted response to the client."""
         self.send_response(200)
