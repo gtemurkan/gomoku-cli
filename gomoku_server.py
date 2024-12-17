@@ -171,7 +171,7 @@ class GameServer(BaseHTTPRequestHandler):
             })
             return
 
-        if len(username) <= 3 or len(password) <= 3:
+        if len(username) <= 3:
             self.send_json_response({
                 "success": False,
                 "message": ("Username and password must be "
