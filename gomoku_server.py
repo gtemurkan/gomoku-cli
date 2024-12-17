@@ -57,6 +57,16 @@ def save_data_game():
 # Была заимствована структура класса для общения клиента с сервером - начало
 class GameServer(BaseHTTPRequestHandler):
     """Server class handling client requests for the Gomoku game."""
+    def __init__(self):
+        """
+        Initializes the client with default values,
+        such as username and server URL.
+        """
+        self.username = None
+        """For internal use"""
+        self.game_id = None
+        """For internal use"""
+        self.SERVER_URL = None
 
     def do_POST(self):
         """Handles POST requests by routing them \
