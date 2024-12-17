@@ -89,13 +89,11 @@ If you want to play on an unofficial server, Enter IP address of that server
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
-        print(f"[!] {self.SERVER_URL}/register")
         response = requests.post(
             f"{self.SERVER_URL}/register",
             json={"username": username, "password": password},
             verify=False
         )
-        print(response.json()["message"])
         print(response.json()["message"])
     # Был заимствован пример функции для класса GomokuClient - конец
 
