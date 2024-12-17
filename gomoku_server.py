@@ -18,6 +18,7 @@ import ssl
 import os
 
 PORT = 8443
+"""Port used by server. It is a constant (8433)"""
 
 GAMES = {}
 """
@@ -27,7 +28,7 @@ stops it loads back to directory.
 """
 DATA_GAME = {}
 """
-Stores users data, which includes:
+Stores users data
     - username
     - password
     - games IDs user played
@@ -349,6 +350,10 @@ class GameServer(BaseHTTPRequestHandler):
         })
 
     def check_winner(self, board, x, y):
+        """
+        Checks if anyone already won the game
+        by making a row of 5 or more
+        """
         c_zero_sym = 0
         for i in board:
             c_zero_sym += i.count("~")

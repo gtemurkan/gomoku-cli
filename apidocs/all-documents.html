@@ -28,7 +28,7 @@
       
       <div class="navlinks">
         <span class="navbar-brand">
-          gomoku/gomoku_server <a href="index.html">API Documentation</a>
+          gomoku_server/gomoku <a href="index.html">API Documentation</a>
         </span>
 
         <a href="moduleIndex.html">
@@ -100,15 +100,7 @@
       <h1>All Documents</h1>
 
        <ul>
-          <li id="gomoku">
-            
-            <div class="fullName">gomoku</div>
-            <div class="url">gomoku.html</div>
-            <div class="type">Module</div>
-            <div class="kind">Module</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Gomoku Client Implementation</div>
-          </li><li id="gomoku_server">
+          <li id="gomoku_server">
             
             <div class="fullName">gomoku<wbr></wbr>_server</div>
             <div class="url">gomoku_server.html</div>
@@ -116,6 +108,166 @@
             <div class="kind">Module</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">Gomoku Server Implementation</div>
+          </li><li id="gomoku">
+            
+            <div class="fullName">gomoku</div>
+            <div class="url">gomoku.html</div>
+            <div class="type">Module</div>
+            <div class="kind">Module</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Gomoku Client Implementation</div>
+          </li><li id="gomoku_server.PORT">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.PORT</div>
+            <div class="url">gomoku_server.html#PORT</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Port used by server. It is a constant (8433)</div>
+          </li><li id="gomoku_server.GAMES">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.GAMES</div>
+            <div class="url">gomoku_server.html#GAMES</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Constant</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">History of every game is saved GAMES_HISTORY directory. At program start it loads to GAMES variable. After program stops it loads back to directory.</div>
+          </li><li id="gomoku_server.DATA_GAME">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.DATA<wbr></wbr>_GAME</div>
+            <div class="url">gomoku_server.html#DATA_GAME</div>
+            <div class="type">Attribute</div>
+            <div class="kind">Variable</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Stores users data</div>
+          </li><li id="gomoku_server.save_data_game">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.save<wbr></wbr>_data<wbr></wbr>_game</div>
+            <div class="url">gomoku_server.html#save_data_game</div>
+            <div class="type">Function</div>
+            <div class="kind">Function</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Saves the game data to a JSON file.</div>
+          </li><li id="gomoku_server.GameServer">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server</div>
+            <div class="url">gomoku_server.GameServer.html</div>
+            <div class="type">Class</div>
+            <div class="kind">Class</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Server class handling client requests for the Gomoku game.</div>
+          </li><li id="gomoku_server.GameServer.do_POST">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.do_<wbr></wbr>POST</div>
+            <div class="url">gomoku_server.GameServer.html#do_POST</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Handles POST requests by routing them         to specific methods based on the endpoint.</div>
+          </li><li id="gomoku_server.GameServer.get_ids_all_games">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.get<wbr></wbr>_ids<wbr></wbr>_all<wbr></wbr>_games</div>
+            <div class="url">gomoku_server.GameServer.html#get_ids_all_games</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Gives list of all games played by user.</div>
+          </li><li id="gomoku_server.GameServer.save_game_history">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.save<wbr></wbr>_game<wbr></wbr>_history</div>
+            <div class="url">gomoku_server.GameServer.html#save_game_history</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Saves games' history to corresponding txt-files.</div>
+          </li><li id="gomoku_server.GameServer.check_game_history">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.check<wbr></wbr>_game<wbr></wbr>_history</div>
+            <div class="url">gomoku_server.GameServer.html#check_game_history</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Checks if specified game history exists and sends date to user.</div>
+          </li><li id="gomoku_server.GameServer.send_json_response">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.send<wbr></wbr>_json<wbr></wbr>_response</div>
+            <div class="url">gomoku_server.GameServer.html#send_json_response</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Sends a JSON-formatted response to the client.</div>
+          </li><li id="gomoku_server.GameServer.register_player">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.register<wbr></wbr>_player</div>
+            <div class="url">gomoku_server.GameServer.html#register_player</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Registers a new player with the provided username and password.</div>
+          </li><li id="gomoku_server.GameServer.login_player">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.login<wbr></wbr>_player</div>
+            <div class="url">gomoku_server.GameServer.html#login_player</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Logs in an existing player by verifying credentials.</div>
+          </li><li id="gomoku_server.GameServer.create_game">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.create<wbr></wbr>_game</div>
+            <div class="url">gomoku_server.GameServer.html#create_game</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Creates a new game and assigns a unique game ID.</div>
+          </li><li id="gomoku_server.GameServer.join_game">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.join<wbr></wbr>_game</div>
+            <div class="url">gomoku_server.GameServer.html#join_game</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Adds a player to an existing game by game ID.</div>
+          </li><li id="gomoku_server.GameServer.c_players_in_game">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.c<wbr></wbr>_players<wbr></wbr>_in<wbr></wbr>_game</div>
+            <div class="url">gomoku_server.GameServer.html#c_players_in_game</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Checks the number of players currently in a game.</div>
+          </li><li id="gomoku_server.GameServer.view_board">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.view<wbr></wbr>_board</div>
+            <div class="url">gomoku_server.GameServer.html#view_board</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Returns the current game board state.</div>
+          </li><li id="gomoku_server.GameServer.wait_move_second">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.wait<wbr></wbr>_move<wbr></wbr>_second</div>
+            <div class="url">gomoku_server.GameServer.html#wait_move_second</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Makes client of one player to wait for move of another player.</div>
+          </li><li id="gomoku_server.GameServer.make_move">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.make<wbr></wbr>_move</div>
+            <div class="url">gomoku_server.GameServer.html#make_move</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Processes a player's move and updates the game state.</div>
+          </li><li id="gomoku_server.GameServer.check_winner">
+            
+            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.check<wbr></wbr>_winner</div>
+            <div class="url">gomoku_server.GameServer.html#check_winner</div>
+            <div class="type">Function</div>
+            <div class="kind">Method</div>
+            <div class="privacy">PUBLIC</div>
+            <div class="summary">Checks if anyone already won the game by making a row of 5 or more</div>
           </li><li id="gomoku.GomokuClient">
             
             <div class="fullName">gomoku<wbr></wbr>.<wbr></wbr>Gomoku<wbr></wbr>Client</div>
@@ -252,158 +404,6 @@
             <div class="kind">Method</div>
             <div class="privacy">PUBLIC</div>
             <div class="summary">Interactively asks player for row and column of place where theirs' piece should be placed. Validated the move.</div>
-          </li><li id="gomoku_server.PORT">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.PORT</div>
-            <div class="url">gomoku_server.html#PORT</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="undocumented">Undocumented</span></div>
-          </li><li id="gomoku_server.GAMES">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.GAMES</div>
-            <div class="url">gomoku_server.html#GAMES</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Constant</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">History of every game is saved GAMES_HISTORY directory. At program start it loads to GAMES variable. After program stops it loads back to directory.</div>
-          </li><li id="gomoku_server.DATA_GAME">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.DATA<wbr></wbr>_GAME</div>
-            <div class="url">gomoku_server.html#DATA_GAME</div>
-            <div class="type">Attribute</div>
-            <div class="kind">Variable</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Stores users data, which includes:</div>
-          </li><li id="gomoku_server.save_data_game">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.save<wbr></wbr>_data<wbr></wbr>_game</div>
-            <div class="url">gomoku_server.html#save_data_game</div>
-            <div class="type">Function</div>
-            <div class="kind">Function</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Saves the game data to a JSON file.</div>
-          </li><li id="gomoku_server.GameServer">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server</div>
-            <div class="url">gomoku_server.GameServer.html</div>
-            <div class="type">Class</div>
-            <div class="kind">Class</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Server class handling client requests for the Gomoku game.</div>
-          </li><li id="gomoku_server.GameServer.do_POST">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.do_<wbr></wbr>POST</div>
-            <div class="url">gomoku_server.GameServer.html#do_POST</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Handles POST requests by routing them         to specific methods based on the endpoint.</div>
-          </li><li id="gomoku_server.GameServer.get_ids_all_games">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.get<wbr></wbr>_ids<wbr></wbr>_all<wbr></wbr>_games</div>
-            <div class="url">gomoku_server.GameServer.html#get_ids_all_games</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Gives list of all games played by user.</div>
-          </li><li id="gomoku_server.GameServer.save_game_history">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.save<wbr></wbr>_game<wbr></wbr>_history</div>
-            <div class="url">gomoku_server.GameServer.html#save_game_history</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Saves games' history to corresponding txt-files.</div>
-          </li><li id="gomoku_server.GameServer.check_game_history">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.check<wbr></wbr>_game<wbr></wbr>_history</div>
-            <div class="url">gomoku_server.GameServer.html#check_game_history</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Checks if specified game history exists and sends date to user.</div>
-          </li><li id="gomoku_server.GameServer.send_json_response">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.send<wbr></wbr>_json<wbr></wbr>_response</div>
-            <div class="url">gomoku_server.GameServer.html#send_json_response</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Sends a JSON-formatted response to the client.</div>
-          </li><li id="gomoku_server.GameServer.register_player">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.register<wbr></wbr>_player</div>
-            <div class="url">gomoku_server.GameServer.html#register_player</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Registers a new player with the provided username and password.</div>
-          </li><li id="gomoku_server.GameServer.login_player">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.login<wbr></wbr>_player</div>
-            <div class="url">gomoku_server.GameServer.html#login_player</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Logs in an existing player by verifying credentials.</div>
-          </li><li id="gomoku_server.GameServer.create_game">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.create<wbr></wbr>_game</div>
-            <div class="url">gomoku_server.GameServer.html#create_game</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Creates a new game and assigns a unique game ID.</div>
-          </li><li id="gomoku_server.GameServer.join_game">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.join<wbr></wbr>_game</div>
-            <div class="url">gomoku_server.GameServer.html#join_game</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Adds a player to an existing game by game ID.</div>
-          </li><li id="gomoku_server.GameServer.c_players_in_game">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.c<wbr></wbr>_players<wbr></wbr>_in<wbr></wbr>_game</div>
-            <div class="url">gomoku_server.GameServer.html#c_players_in_game</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Checks the number of players currently in a game.</div>
-          </li><li id="gomoku_server.GameServer.view_board">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.view<wbr></wbr>_board</div>
-            <div class="url">gomoku_server.GameServer.html#view_board</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Returns the current game board state.</div>
-          </li><li id="gomoku_server.GameServer.wait_move_second">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.wait<wbr></wbr>_move<wbr></wbr>_second</div>
-            <div class="url">gomoku_server.GameServer.html#wait_move_second</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Makes client of one player to wait for move of another player.</div>
-          </li><li id="gomoku_server.GameServer.make_move">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.make<wbr></wbr>_move</div>
-            <div class="url">gomoku_server.GameServer.html#make_move</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary">Processes a player's move and updates the game state.</div>
-          </li><li id="gomoku_server.GameServer.check_winner">
-            
-            <div class="fullName">gomoku<wbr></wbr>_server<wbr></wbr>.<wbr></wbr>Game<wbr></wbr>Server<wbr></wbr>.check<wbr></wbr>_winner</div>
-            <div class="url">gomoku_server.GameServer.html#check_winner</div>
-            <div class="type">Function</div>
-            <div class="kind">Method</div>
-            <div class="privacy">PUBLIC</div>
-            <div class="summary"><span class="undocumented">Undocumented</span></div>
           </li>
        </ul>
     </div>
