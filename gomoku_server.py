@@ -13,6 +13,8 @@ It supports:
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import socket
+import bcrypt
+
 import json
 import ssl
 import os
@@ -30,7 +32,7 @@ DATA_GAME = {}
 """
 Stores users data
     - username
-    - password
+    - hashed password
     - games IDs user played
 """
 
@@ -160,7 +162,7 @@ class GameServer(BaseHTTPRequestHandler):
     def register_player(self, data):
         """Registers a new player with the provided username and password."""
         username = data.get("username")
-        password = data.get("password")
+        hashpass = data.get("hashpass")
 
         if username in DATA_GAME:
             self.send_json_response({
@@ -169,15 +171,15 @@ class GameServer(BaseHTTPRequestHandler):
             })
             return
 
-        if len(username) <= 3 or len(password) <= 3:
+        if len(username) <= 3:
             self.send_json_response({
                 "success": False,
-                "message": ("Username and password must be "
+                "message": ("Username must be "
                             "at least 4 characters long.")
             })
             return
 
-        DATA_GAME[username] = {"password": password, "games": []}
+        DATA_GAME[username] = {"hashpass": hashpass, "games": []}
         save_data_game()
         self.send_json_response({
             "success": True,
@@ -187,10 +189,10 @@ class GameServer(BaseHTTPRequestHandler):
     def login_player(self, data):
         """Logs in an existing player by verifying credentials."""
         username = data.get("username")
-        password = data.get("password")
+        hashpass = data.get("hashpass")
 
         if username not in DATA_GAME \
-                or DATA_GAME[username]["password"] != password:
+                or DATA_GAME[username]["hashpass"] != hashpass:
             self.send_json_response({
                 "success": False,
                 "message": "Invalid username or password."
@@ -245,6 +247,11 @@ class GameServer(BaseHTTPRequestHandler):
             "success": True,
             "message": f"Joined game {game_id}."
         })
+
+    def __hashed_password(self, password: str):
+        res = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        res = res.decode()
+        return res
 
     def c_players_in_game(self, data):
         """Checks the number of players currently in a game."""

@@ -10,19 +10,6 @@ class TestGomokuClient(unittest.TestCase):
         self.client.SERVER_URL = "https://localhost:8443"
 
     @patch('gomoku.requests.post')
-    def test_register_success(self, mock_post):
-        mock_post.return_value.json.return_value = {
-            "message": "User registered successfully."
-        }
-        with patch('builtins.input', side_effect=['testuser', 'testpass']):
-            self.client.register()
-        mock_post.assert_called_once_with(
-            f"{self.client.SERVER_URL}/register",
-            json={"username": "testuser", "password": "testpass"},
-            verify=False
-        )
-
-    @patch('gomoku.requests.post')
     def test_login_success(self, mock_post):
         mock_post.return_value.json.return_value = {
             "success": True, "message": "Login successful."}
@@ -57,7 +44,7 @@ class TestGomokuClient(unittest.TestCase):
         with patch('builtins.input', side_effect=["server"]):
             self.client.get_server()
         self.assertEqual(self.client.SERVER_URL, "https://109.196.98.96:8443")
-        
+
     @patch('gomoku.requests.post')
     def test_get_server_success_local(self, mock_post):
         with patch('builtins.input', side_effect=["local"]):

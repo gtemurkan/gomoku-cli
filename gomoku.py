@@ -13,6 +13,8 @@ It supports:
 """
 
 import requests
+import bcrypt
+
 import time
 import os
 import re
@@ -89,9 +91,13 @@ If you want to play on an unofficial server, Enter IP address of that server
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
+        if len(password) < 4:
+            print("Password length must be at least 4")
+            return
+        hashed_password = self.__hashed_password(password)
         response = requests.post(
             f"{self.SERVER_URL}/register",
-            json={"username": username, "password": password},
+            json={"username": username, "passhash": hashed_password},
             verify=False
         )
         print(response.json()["message"])
@@ -105,9 +111,10 @@ If you want to play on an unofficial server, Enter IP address of that server
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
+        hashed_password = self.__hashed_password(password)
         response = requests.post(
             f"{self.SERVER_URL}/login",
-            json={"username": username, "password": password},
+            json={"username": username, "hashpass": hashed_password},
             verify=False
         )
         if response.json()["success"]:
@@ -205,6 +212,11 @@ If you want to play on an unofficial server, Enter IP address of that server
             os.system('cls')
             print("Please Login or Register\n"
                   "If you're registered, you need to login")
+
+    def __hashed_password(self, password: str):
+        res = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        res = res.decode()
+        return res
 
     def join_game(self):
         """Joins user to an existing game with specified ID"""
