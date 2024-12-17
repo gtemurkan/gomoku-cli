@@ -64,26 +64,27 @@ class GomokuClient:
             r"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.)){3}"
             r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" "{1}$"
         )
-        while True:
-            ans_server_url = input('''
+        
+        ans_server_url = input('''
 To play on a local network, Enter word: <local>
 To play on the official server, Enter word: <server>
 If you want to play on an unofficial server, Enter IP address of that server
     command: ''')
 
-            requests.packages.urllib3.disable_warnings()
+        requests.packages.urllib3.disable_warnings()
 
-            if ans_server_url in ["server", "<server>"]:
-                self.SERVER_URL = "https://109.196.98.96:8443"
-                break
-            if ans_server_url in ["local", "<local>"]:
-                self.SERVER_URL = "https://localhost:8443"
-                break
-            if bool(re.match(IP_PATTERN, ans_server_url)):
-                self.SERVER_URL = f"https://{ans_server_url}:8443"
-                break
-            else:
-                print("BAD VALUE")
+        if ans_server_url in ["server", "<server>"]:
+            self.SERVER_URL = "https://109.196.98.96:8443"
+            return True
+        if ans_server_url in ["local", "<local>"]:
+            self.SERVER_URL = "https://localhost:8443"
+            return True
+        if bool(re.match(IP_PATTERN, ans_server_url)):
+            self.SERVER_URL = f"https://{ans_server_url}:8443"
+            return True
+        else:
+            print("BAD VALUE")
+            return False
 
     # Был заимствован пример функции для класса GomokuClient - начало
     def register(self):
@@ -422,7 +423,10 @@ if __name__ == "__main__":
     client = GomokuClient()
     os.system('cls')
 
-    client.get_server()
+    if not(client.get_server()):
+        print("The script will end in 10 seconds.")
+        time.sleep(10)
+        exit()
 
     os.system('cls')
 
