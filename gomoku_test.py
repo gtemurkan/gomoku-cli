@@ -52,6 +52,24 @@ class TestGomokuClient(unittest.TestCase):
         result = self.client.view_board()
         self.assertEqual(result, "board_is_shown")
 
+    @patch('gomoku.requests.post')
+    def test_get_server_success_server(self, mock_post):
+        with patch('builtins.input', side_effect=["server"]):
+            self.client.get_server()
+        self.assertEqual(self.client.SERVER_URL, "https://109.196.98.96:8443")
+        
+    @patch('gomoku.requests.post')
+    def test_get_server_success_local(self, mock_post):
+        with patch('builtins.input', side_effect=["local"]):
+            self.client.get_server()
+        self.assertEqual(self.client.SERVER_URL, "https://localhost:8443")
+
+    @patch('gomoku.requests.post')
+    def test_get_server_success_anyip(self, mock_post):
+        with patch('builtins.input', side_effect=["196.128.64.32"]):
+            self.client.get_server()
+        self.assertEqual(self.client.SERVER_URL, "https://196.128.64.32:8443")
+
 
 if __name__ == '__main__':
     unittest.main()
