@@ -30,7 +30,7 @@ OpenSSL lib must be installed on your system.
 
 then generate certificate using:
 ```
-py ssl_cert.py # Windows
+py ssl_cert.py
 ```
 
 Then you can launch server.

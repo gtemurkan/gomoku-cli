@@ -91,13 +91,9 @@ If you want to play on an unofficial server, Enter IP address of that server
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
-        if len(password) < 4:
-            print("Password length must be at least 4")
-            return
-        hashed_password = self.__hashed_password(password)
         response = requests.post(
             f"{self.SERVER_URL}/register",
-            json={"username": username, "passhash": hashed_password},
+            json={"username": username, "password": password},
             verify=False
         )
         print(response.json()["message"])
@@ -111,10 +107,9 @@ If you want to play on an unofficial server, Enter IP address of that server
         os.system('cls')
         username = input("Enter username: ")
         password = input("Enter password: ")
-        hashed_password = self.__hashed_password(password)
         response = requests.post(
             f"{self.SERVER_URL}/login",
-            json={"username": username, "hashpass": hashed_password},
+            json={"username": username, "password": password},
             verify=False
         )
         if response.json()["success"]:
