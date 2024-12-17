@@ -21,11 +21,6 @@ Launch on Windows:
 py gomoku.py
 ```
 
-Mac/Unix:
-```
-python3 gomoku.py
-```
-
 Custom server
 -------------
 
@@ -36,8 +31,6 @@ OpenSSL lib must be installed on your system.
 then generate certificate using:
 ```
 py ssl_cert.py # Windows
-
-python3 ssl_cert.py # Unix/Mac
 ```
 
 Then you can launch server.
@@ -45,9 +38,4 @@ Then you can launch server.
 Launch on Windows:
 ```
 py gomoku_server.py
-```
-
-Mac/Unix:
-```
-python3 gomoku_server.py
 ```
