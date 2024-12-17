@@ -49,8 +49,5 @@ py gomoku_server.py
 
 Mac/Unix:
 ```
-cd ssl_cert
-python3 ssl_cert.py # You need to generate ssl_cert first
-cd ..
 python3 gomoku_server.py
 ```
