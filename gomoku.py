@@ -78,7 +78,7 @@ If you want to play on an unofficial server, Enter IP address of that server
                 self.SERVER_URL = "https://localhost:8443"
                 break
             if bool(re.match(IP_PATTERN, ans_server_url)):
-                self.SERVER_URL = ans_server_url
+                self.SERVER_URL = f"https://{ans_server_url}:8443"
                 break
             else:
                 print("BAD VALUE")
