@@ -11,8 +11,8 @@ def generate_ssl_cert(cert_file="server.crt", key_file="server.key"):
     Generates a self-signed SSL-certificate and a private key.
     """
     if os.path.exists(cert_file) and os.path.exists(key_file):
-        print(f"Certificate {cert_file} and private key {
-              key_file} already exist.")
+        print(f"Certificate {cert_file} and "
+              f"private key {key_file} already exist.")
         return
 
     command = [

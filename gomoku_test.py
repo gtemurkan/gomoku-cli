@@ -68,8 +68,7 @@ class TestGomokuClient(unittest.TestCase):
         self.client.create_game()
         mock_post.assert_called_once_with(
             f"{self.client._server_url}/create_game",
-            json={"username": "testuser"},
-            verify=False
+            json={"username": "testuser"}
         )
 
     @patch('gomoku.requests.post')

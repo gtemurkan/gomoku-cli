@@ -18,8 +18,6 @@ import time
 import os
 import re
 
-_req = requests.Session()
-
 
 def main():
     """
@@ -150,10 +148,9 @@ class GomokuClient:
         os.system("cls")
         username = input("Enter username: ")
         password = input("Enter password: ")
-        response = _req.post(
+        response = requests.post(
             f"{self._server_url}/register",
-            json={"username": username, "password": password},
-            verify=False
+            json={"username": username, "password": password}
         )
         print(response.json()["message"])
     # Borrowed method example for class GomokuClient - end
@@ -166,7 +163,7 @@ class GomokuClient:
         os.system("cls")
         username = input("Enter username: ")
         password = input("Enter password: ")
-        response = _req.post(
+        response = requests.post(
             f"{self._server_url}/login",
             json={"username": username, "password": password}
         )
@@ -177,10 +174,9 @@ class GomokuClient:
     def get_ids_all_games(self):
         """Displays ids of all games user played"""
         if self._username:
-            response = _req.post(
+            response = requests.post(
                 f"{self._server_url}/get_ids_all_games",
-                json={"username": self._username},
-                verify=False,
+                json={"username": self._username}
             )
             if response.json()["success"]:
                 os.system("cls")
@@ -200,10 +196,9 @@ class GomokuClient:
         retrieves its game ID from the server.
         """
         if self._username:
-            response = _req.post(
+            response = requests.post(
                 f"{self._server_url}/create_game",
-                json={"username": self._username},
-                verify=False,
+                json={"username": self._username}
             )
             if response.json()["success"]:
                 os.system("cls")
@@ -228,10 +223,9 @@ class GomokuClient:
                 "Enter the number of the game you are "
                 "interested in, in which you participated: "
             )
-            response = _req.post(
+            response = requests.post(
                 f"{self._server_url}/check_game_history",
-                json={"username": self._username, "game_id": self._game_id},
-                verify=False,
+                json={"username": self._username, "game_id": self._game_id}
             )
             if response.json()["success"]:
 
@@ -270,20 +264,18 @@ class GomokuClient:
         if self._username:
             self._game_id = int(input("Enter game ID to join: "))
             os.system("cls")
-            response = _req.post(
+            response = requests.post(
                 f"{self._server_url}/join_game",
-                json={"username": self._username, "game_id": self._game_id},
-                verify=False,
+                json={"username": self._username, "game_id": self._game_id}
             )
             print(response.json()["message"])
             c_waiting = 1
             while True:
                 print(f"Wait 2 seconds for second user")
                 time.sleep(2)
-                response = _req.post(
+                response = requests.post(
                     f"{self._server_url}/c_players_in_game",
-                    json={"game_id": self._game_id},
-                    verify=False,
+                    json={"game_id": self._game_id}
                 )
                 data = response.json()
                 if data["success"]:
@@ -302,13 +294,12 @@ class GomokuClient:
                             print(
                                 f"Wait {2 * c_waiting}" "seconds for second user")
                             time.sleep(2 * c_waiting)
-                            response = _req.post(
+                            response = requests.post(
                                 f"{self._server_url}/wait_move_second",
                                 json={
                                     "username": self._username,
                                     "game_id": self._game_id,
-                                },
-                                verify=False,
+                                }
                             )
                             data = response.json()
                             if data["success"]:
@@ -364,10 +355,9 @@ class GomokuClient:
         Print an ASCII Picture of current
         game state including players pieces
         """
-        response = _req.post(
+        response = requests.post(
             f"{self._server_url}/view_board",
-            json={"username": self._username, "game_id": self._game_id},
-            verify=False,
+            json={"username": self._username, "game_id": self._game_id}
         )
         data = response.json()
         if data["success"]:
@@ -393,37 +383,34 @@ class GomokuClient:
                 try:
                     x = int(input("Enter row (1-19): "))
                     y = int(input("Enter column (1-19): "))
-                    response = _req.post(
+                    response = requests.post(
                         f"{self._server_url}/make_move",
                         json={
                             "username": self._username,
                             "game_id": self._game_id,
                             "x": x - 1,
                             "y": y - 1,
-                        },
-                        verify=False,
+                        }
                     )
                 except:
-                    response = _req.post(
+                    response = requests.post(
                         f"{self._server_url}/make_move",
                         json={
                             "username": self._username,
                             "game_id": self._game_id,
                             "x": x,
                             "y": y,
-                        },
-                        verify=False,
+                        }
                     )
             else:
-                response = _req.post(
+                response = requests.post(
                     f"{self._server_url}/make_move",
                     json={
                         "username": self._username,
                         "game_id": self._game_id,
                         "x": x,
                         "y": y,
-                    },
-                    verify=False,
+                    }
                 )
             data = response.json()
             if data["success"]:
@@ -441,11 +428,10 @@ class GomokuClient:
                     while True:
                         print(f"Wait {2*(c_waiting)} seconds for second user")
                         time.sleep(2 * c_waiting)
-                        response = _req.post(
+                        response = requests.post(
                             f"{self._server_url}/wait_move_second",
                             json={"username": self._username,
-                                  "game_id": self._game_id},
-                            verify=False,
+                                  "game_id": self._game_id}
                         )
                         data = response.json()
                         if data["success"]:

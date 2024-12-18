@@ -187,12 +187,12 @@ class GameServer(SimpleHTTPRequestHandler):
             )
             return
 
-        if len(username) <= 3:
+        if len(username) <= 3 or len(password) <= 3:
             self.send_json_response(
                 {
                     "success": False,
                     "message": (
-                        "Username and password must be " "at least 4 characters long."
+                        "Username and password must be at least 4 characters long."
                     ),
                 }
             )
@@ -222,7 +222,6 @@ class GameServer(SimpleHTTPRequestHandler):
         """Creates a new game and assigns a unique game ID."""
         DATA_GAME["total_id_game"] += 1
         game_id = DATA_GAME["total_id_game"]
-        username = data.get("username")
 
         GAMES[game_id] = {
             "players": [],
