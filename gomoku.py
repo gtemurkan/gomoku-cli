@@ -19,62 +19,7 @@ import os
 import re
 
 
-def main():
-    """
-    Starting point for the gomoku client script.
-    """
-
-    client = GomokuClient()
-    os.system("cls")
-
-    if not client.get_server():
-        print("The script will end in 10 seconds.")
-        time.sleep(10)
-        exit()
-
-    os.system("cls")
-
-    client.slogan_gomoku()
-
-    while True:
-        try:
-            print(
-                "\n1. Register"
-                "\n2. Login"
-                "\n3. Create Game"
-                "\n4. Join Game"
-                "\n5. Make Move"
-                "\n6. Check game history"
-                "\n7. Get ids all games"
-                "\n8. Exit"
-            )
-            choice = input("Select an option: ")
-            match choice:
-                case "1":
-                    client.register()
-                case "2":
-                    client.login()
-                case "3":
-                    client.create_game()
-                case "4":
-                    client.join_game()
-                case "5":
-                    client.make_move()
-                case "6":
-                    client.check_game_history()
-                case "7":
-                    client.get_ids_all_games()
-                case "8":
-                    break
-                case _:
-                    print("Invalid choice. Try again.")
-        except ConnectionError:
-            print(
-                "Check your internet connection\n"
-                "Or ask for help your server administrator"
-            )
-        except Exception as e:
-            print(f"{type(e).__name__}\nError: {e}")
+_clear = None
 
 
 class GomokuClient:
@@ -145,7 +90,7 @@ class GomokuClient:
         """
         Registers a new user by sending their credentials to the server.
         """
-        os.system("cls")
+        _clear()
         username = input("Enter username: ")
         password = input("Enter password: ")
         response = requests.post(
@@ -160,7 +105,7 @@ class GomokuClient:
         Logs in an existing user by verifying
         credentials with the server.
         """
-        os.system("cls")
+        _clear()
         username = input("Enter username: ")
         password = input("Enter password: ")
         response = requests.post(
@@ -179,13 +124,13 @@ class GomokuClient:
                 json={"username": self._username}
             )
             if response.json()["success"]:
-                os.system("cls")
+                _clear()
                 print(f"Ids_all_games: {response.json()['games']}")
             else:
-                os.system("cls")
+                _clear()
                 print(response.json()["message"])
         else:
-            os.system("cls")
+            _clear()
             print(
                 "Please Login or Register\n" "If you're registered, you need to login"
             )
@@ -201,13 +146,13 @@ class GomokuClient:
                 json={"username": self._username}
             )
             if response.json()["success"]:
-                os.system("cls")
+                _clear()
                 print(f"Game created with ID: {response.json()['game_id']}")
             else:
-                os.system("cls")
+                _clear()
                 print(response.json()["message"])
         else:
-            os.system("cls")
+            _clear()
             print(
                 "Please Login or Register\n" "If you're registered, you need to login"
             )
@@ -218,7 +163,7 @@ class GomokuClient:
         made in selected game. Player may choose specific moves.
         """
         if self._username:
-            os.system("cls")
+            _clear()
             self._game_id = input(
                 "Enter the number of the game you are "
                 "interested in, in which you participated: "
@@ -239,7 +184,7 @@ class GomokuClient:
                     )
                     print(f"Total moves: {len(self.__data)//23}")
                     ans = input("Enter: ")
-                    os.system("cls")
+                    _clear()
                     print(f"MOVE: {ans}")
                     if ans in ["exit", "<exit>"]:
                         break
@@ -251,10 +196,10 @@ class GomokuClient:
                         print("Invalid Value")
 
             else:
-                os.system("cls")
+                _clear()
                 print(response.json()["message"])
         else:
-            os.system("cls")
+            _clear()
             print(
                 "Please Login or Register\n" "If you're registered, you need to login"
             )
@@ -263,7 +208,7 @@ class GomokuClient:
         """Joins user to an existing game with specified ID"""
         if self._username:
             self._game_id = int(input("Enter game ID to join: "))
-            os.system("cls")
+            _clear()
             response = requests.post(
                 f"{self._server_url}/join_game",
                 json={"username": self._username, "game_id": self._game_id}
@@ -283,7 +228,7 @@ class GomokuClient:
                         if p != self._username:
                             opponent = p
                             break
-                    os.system("cls")
+                    _clear()
                     print(f"You and {opponent} in the game")
                     if data["turn"] == self._username:
                         print("Your turn\nLet's make  move")
@@ -303,12 +248,12 @@ class GomokuClient:
                             )
                             data = response.json()
                             if data["success"]:
-                                os.system("cls")
+                                _clear()
                                 print(f"Your opponent has made a move.")
                                 break
                             else:
                                 if c_waiting % 6 == 0:
-                                    os.system("cls")
+                                    _clear()
                                     want_exit = input(
                                         "Second user hasn't made a move yet\n"
                                         "If you want to continue waiting "
@@ -319,7 +264,7 @@ class GomokuClient:
                                         c_waiting = 1
                                         continue
                                     elif want_exit in ["<exit>", "exit"]:
-                                        os.system("cls")
+                                        _clear()
                                         break
                                     else:
                                         print("Write only <cont> or <exit>")
@@ -327,7 +272,7 @@ class GomokuClient:
                                     c_waiting += 1
                     break
                 elif c_waiting % 6 == 0:
-                    os.system("cls")
+                    _clear()
                     want_exit = input(
                         "Second user not connected yet\n"
                         "If you want to continue waiting write <cont>\n"
@@ -337,7 +282,7 @@ class GomokuClient:
                         c_waiting = 1
                         continue
                     elif want_exit in ["<exit>", "exit"]:
-                        os.system("cls")
+                        _clear()
                         break
                     else:
                         print("Write only <cont> or <exit>")
@@ -345,7 +290,7 @@ class GomokuClient:
                     c_waiting += 1
 
         else:
-            os.system("cls")
+            _clear()
             print(
                 "Please Login or Register\n" "If you're registered, you need to login"
             )
@@ -361,7 +306,7 @@ class GomokuClient:
         )
         data = response.json()
         if data["success"]:
-            os.system("cls")
+            _clear()
             print(f'{" " * 4} {self.__NUM_ROW}')
             for row in range(len(data["board"])):
                 print(f'{row+1:3}| {"  ".join(data["board"][row])}')
@@ -414,7 +359,7 @@ class GomokuClient:
                 )
             data = response.json()
             if data["success"]:
-                os.system("cls")
+                _clear()
                 print(f'{" " * 4} {self.__NUM_ROW}')
                 for row in range(len(data["board"])):
                     print(f'{row+1:3}| {"  ".join(data["board"][row])}')
@@ -436,7 +381,7 @@ class GomokuClient:
                         data = response.json()
                         if data["success"]:
                             if data["winner"]:
-                                os.system("cls")
+                                _clear()
                                 print(f'{" " * 4} {self.__NUM_ROW}')
                                 for row in range(len(data["board"])):
                                     print(
@@ -447,7 +392,7 @@ class GomokuClient:
                                     print(f"Winner: {data['winner']}")
 
                             else:
-                                os.system("cls")
+                                _clear()
                                 print(f"Your opponent has made a move.")
                             break
                         else:
@@ -460,23 +405,88 @@ class GomokuClient:
                                 )
                                 if want_exit in ["<cont>", "cont"]:
                                     c_waiting = 1
-                                    os.system("cls")
+                                    _clear()
                                     continue
                                 if want_exit in ["<exit>", "exit"]:
-                                    os.system("cls")
+                                    _clear()
                                     break
                             c_waiting += 1
             else:
-                os.system("cls")
+                _clear()
                 print(data["message"])
         elif self._username:
-            os.system("cls")
+            _clear()
             print("Please join game (point 4)")
         else:
-            os.system("cls")
+            _clear()
             print(
                 "Please Login or Register\n" "If you're registered, you need to login"
             )
+
+
+def main():
+    """
+    Starting point for the gomoku client script.
+    """
+
+    global _clear
+    
+    if os.name == 'nt':
+        _clear = lambda: os.system('cls')
+    else:
+        _clear = lambda: os.system('clear')
+
+    client = GomokuClient()
+    _clear()
+
+    if not client.get_server():
+        print("The script will end in 10 seconds.")
+        time.sleep(10)
+        exit()
+
+    _clear()
+
+    client.slogan_gomoku()
+
+    while True:
+        try:
+            print(
+                "\n1. Register"
+                "\n2. Login"
+                "\n3. Create Game"
+                "\n4. Join Game"
+                "\n5. Make Move"
+                "\n6. Check game history"
+                "\n7. Get ids all games"
+                "\n8. Exit"
+            )
+            choice = input("Select an option: ")
+            match choice:
+                case "1":
+                    client.register()
+                case "2":
+                    client.login()
+                case "3":
+                    client.create_game()
+                case "4":
+                    client.join_game()
+                case "5":
+                    client.make_move()
+                case "6":
+                    client.check_game_history()
+                case "7":
+                    client.get_ids_all_games()
+                case "8":
+                    break
+                case _:
+                    print("Invalid choice. Try again.")
+        except ConnectionError:
+            print(
+                "Check your internet connection\n"
+                "Or ask for help your server administrator"
+            )
+        except Exception as e:
+            print(f"{type(e).__name__}\nError: {e}")
 
 
 if __name__ == "__main__":
