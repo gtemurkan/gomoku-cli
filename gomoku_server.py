@@ -12,9 +12,7 @@ It supports:
 """
 
 from http.server import SimpleHTTPRequestHandler, HTTPServer
-
 import json
-import ssl
 import os
 
 GAMES = {}
@@ -47,17 +45,16 @@ def main():
         DATA_GAME = {"total_id_game": 0}
     os.makedirs("GAMES_HISTORY", exist_ok=True)
 
-    server_address = _get_address_from_user()
-
     try:
-        SSL_CERT_FILE = r"ssl_cert\server.crt"
-        SSL_KEY_FILE = r"ssl_cert\server.key"
+        server_address = _get_address_from_user()
         httpd = HTTPServer(server_address, GameServer)
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        ssl_context.load_cert_chain(certfile=SSL_CERT_FILE, keyfile=SSL_KEY_FILE)
-        httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
+        # SSL_CERT_FILE = r"server.crt"
+        # SSL_KEY_FILE = r"server.key"
+        # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        # ssl_context.load_cert_chain(certfile=SSL_CERT_FILE, keyfile=SSL_KEY_FILE)
+        # httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
 
-        print("Server running on https://%s:%s..." % server_address)
+        print("Server running on http://%s:%s..." % server_address)
         httpd.serve_forever()
     except Exception as e:
         print("\nFailed. Try again")
@@ -67,10 +64,10 @@ def main():
 def _get_address_from_user():
     DEFAULT_PORT = 8443
     user_input = input(
-        "\tEnter <address> for this server\n"
-        "\tFor local game enter <localhost>\n"
+        "Enter <address> for this server\n"
+        "For local game enter <localhost>\n"
         "\tCommand: "
-    )
+    ).strip()
     return (user_input, DEFAULT_PORT)
 
 
