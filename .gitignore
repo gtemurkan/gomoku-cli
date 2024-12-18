@@ -2,6 +2,7 @@
 /.pytest_cache
 /GAMES_HISTORY
 /data_game.json
-/ssl_cert/server*
+/server.crt
+/server.key
 /.git*
 !.gitignore

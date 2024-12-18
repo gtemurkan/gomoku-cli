@@ -11,16 +11,11 @@ It supports:
     4. Managing game history
 """
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import socket
-import bcrypt
+from http.server import SimpleHTTPRequestHandler, HTTPServer
 
 import json
 import ssl
 import os
-
-PORT = 8443
-"""Port used by server. It is a constant (8433)"""
 
 GAMES = {}
 """
@@ -36,42 +31,62 @@ Stores users data
     - games IDs user played
 """
 
-# Load game data from a file if it exists
-try:
-    with open("data_game.json", "r") as f:
-        DATA_GAME = json.load(f)
-except FileNotFoundError:
-    DATA_GAME = {"total_id_game": 0}
 
-# Ensure the GAMES_HISTORY directory exists
-if not os.path.isdir("GAMES_HISTORY"):
-    os.makedirs("GAMES_HISTORY")
+def main():
+    """
+    Server script starting point. Creates and launches web server.
+    """
+
+    global DATA_GAME
+
+    DATA_GAME_FILE = r"data_game.json"
+    try:
+        with open(DATA_GAME_FILE, "r") as f:
+            DATA_GAME = json.load(f)
+    except FileNotFoundError:
+        DATA_GAME = {"total_id_game": 0}
+    os.makedirs("GAMES_HISTORY", exist_ok=True)
+
+    server_address = _get_address_from_user()
+
+    try:
+        SSL_CERT_FILE = r"ssl_cert\server.crt"
+        SSL_KEY_FILE = r"ssl_cert\server.key"
+        httpd = HTTPServer(server_address, GameServer)
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        ssl_context.load_cert_chain(certfile=SSL_CERT_FILE, keyfile=SSL_KEY_FILE)
+        httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
+
+        print("Server running on https://%s:%s..." % server_address)
+        httpd.serve_forever()
+    except Exception as e:
+        print("\nFailed. Try again")
+        print(f"Error: {e}")
 
 
-def save_data_game():
+def _get_address_from_user():
+    DEFAULT_PORT = 8443
+    user_input = input(
+        "\tEnter <address> for this server\n"
+        "\tFor local game enter <localhost>\n"
+        "\tCommand: "
+    )
+    return (user_input, DEFAULT_PORT)
+
+
+def _save_data_game():
     """Saves the game data to a JSON file."""
     with open("data_game.json", "w") as f:
         json.dump(DATA_GAME, f)
 
 
-# Была заимствована структура класса для общения клиента с сервером - начало
-class GameServer(BaseHTTPRequestHandler):
+class GameServer(SimpleHTTPRequestHandler):
     """Server class handling client requests for the Gomoku game."""
-    def __init__(self):
-        """
-        Initializes the client with default values,
-        such as username and server URL.
-        """
-        self.username = None
-        """For internal use"""
-        self.game_id = None
-        """For internal use"""
-        self.SERVER_URL = None
 
     def do_POST(self):
         """Handles POST requests by routing them \
         to specific methods based on the endpoint."""
-        content_length = int(self.headers['Content-Length'])
+        content_length = int(self.headers["Content-Length"])
         post_data = self.rfile.read(content_length)
         data = json.loads(post_data)
 
@@ -93,30 +108,23 @@ class GameServer(BaseHTTPRequestHandler):
             endpoints[self.path](data)
         else:
             self.send_error(404, "Endpoint not found")
-# Была заимствована структура класса для общения клиента с сервером - конец
 
     def get_ids_all_games(self, data):
         """Gives list of all games played by user."""
         username = data.get("username")
         if username in DATA_GAME:
-            self.send_json_response({
-                "success": True,
-                "games": DATA_GAME[username]["games"]
-            })
+            self.send_json_response(
+                {"success": True, "games": DATA_GAME[username]["games"]}
+            )
         else:
-            self.send_json_response({
-                "success": False,
-                "message": "Invalid username"
-            })
+            self.send_json_response(
+                {"success": False, "message": "Invalid username"})
 
     def save_game_history(self, GAMES, game_id):
         """Saves games' history to corresponding txt-files."""
         for user in GAMES[game_id]["players"]:
             with open(
-                f'GAMES_HISTORY/'
-                f'Game_{game_id}_{user}.txt',
-                "a+",
-                encoding="utf-8"
+                f"GAMES_HISTORY/" f"Game_{game_id}_{user}.txt", "a+", encoding="utf-8"
             ) as f:
                 f.write(
                     f'PLAYERS: {GAMES[game_id]["players"][0]} - ○ ;'
@@ -126,13 +134,15 @@ class GameServer(BaseHTTPRequestHandler):
                     if p != GAMES[game_id]["turn"]:
                         player_moved = p
                         break
-                f.write(f'MADE A MOVE: {player_moved}\n')
+                f.write(f"MADE A MOVE: {player_moved}\n")
                 f.write(f'WINNER: {GAMES[game_id]["winner"]}\n')
                 num_row = "".join(f"{str(ic):3}" for ic in range(1, 20))
                 f.write(f'{" " * 4} {num_row}\n')
                 for row in range(len(GAMES[game_id]["board"])):
-                    f.write(f'{row + 1:3}| '
-                            f'{"  ".join(GAMES[game_id]["board"][row])}\n')
+                    f.write(
+                        f"{row +
+                            1:3}| " f'{"  ".join(GAMES[game_id]["board"][row])}\n'
+                    )
                 f.close()
 
     def check_game_history(self, data):
@@ -141,33 +151,33 @@ class GameServer(BaseHTTPRequestHandler):
         username = data.get("username")
         try:
             with open(
-                    f'GAMES_HISTORY/'
-                    f'Game_{game_id}_{username}.txt',
-                    'r', encoding="utf-8") as file:
+                f"GAMES_HISTORY/" f"Game_{game_id}_{username}.txt",
+                "r",
+                encoding="utf-8",
+            ) as file:
                 data = file.readlines()
                 file.close()
-                self.send_json_response({
-                    "success": True,
-                    "data_history": data
-                })
+                self.send_json_response(
+                    {"success": True, "data_history": data})
                 return
         except IOError as e:
             print(e)
-            self.send_json_response({
-                "success": False,
-                "message": (u'The file could not be opened/'
-                            u'double-check the data')
-            })
+            self.send_json_response(
+                {
+                    "success": False,
+                    "message": (
+                        "The file could not be opened/" "double-check the data"
+                    ),
+                }
+            )
             return
 
-    # Был заимствован синтаксис функции, отвечающей за отправку запроса - начало
     def send_json_response(self, response):
         """Sends a JSON-formatted response to the client."""
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(response).encode("utf-8"))
-    # Был заимствован синтаксис функции, отвечающей за отправку запроса - конец
 
     def register_player(self, data):
         """Registers a new player with the provided username and password."""
@@ -175,44 +185,41 @@ class GameServer(BaseHTTPRequestHandler):
         password = data.get("password")
 
         if username in DATA_GAME:
-            self.send_json_response({
-                "success": False,
-                "message": "User already exists."
-            })
+            self.send_json_response(
+                {"success": False, "message": "User already exists."}
+            )
             return
 
         if len(username) <= 3:
-            self.send_json_response({
-                "success": False,
-                "message": ("Username and password must be "
-                            "at least 4 characters long.")
-            })
+            self.send_json_response(
+                {
+                    "success": False,
+                    "message": (
+                        "Username and password must be " "at least 4 characters long."
+                    ),
+                }
+            )
             return
 
         DATA_GAME[username] = {"password": password, "games": []}
-        save_data_game()
-        self.send_json_response({
-            "success": True,
-            "message": "User registered successfully."
-        })
+        _save_data_game()
+        self.send_json_response(
+            {"success": True, "message": "User registered successfully."}
+        )
 
     def login_player(self, data):
         """Logs in an existing player by verifying credentials."""
         username = data.get("username")
         password = data.get("password")
 
-        if username not in DATA_GAME \
-                or DATA_GAME[username]["password"] != password:
-            self.send_json_response({
-                "success": False,
-                "message": "Invalid username or password."
-            })
+        if username not in DATA_GAME or DATA_GAME[username]["password"] != password:
+            self.send_json_response(
+                {"success": False, "message": "Invalid username or password."}
+            )
             return
 
-        self.send_json_response({
-            "success": True,
-            "message": "Login successful."
-        })
+        self.send_json_response(
+            {"success": True, "message": "Login successful."})
 
     def create_game(self, data):
         """Creates a new game and assigns a unique game ID."""
@@ -224,7 +231,7 @@ class GameServer(BaseHTTPRequestHandler):
             "players": [],
             "board": [["~"] * 19 for _ in range(19)],
             "turn": "",
-            "winner": None
+            "winner": None,
         }
 
         self.send_json_response({"success": True, "game_id": game_id})
@@ -235,28 +242,24 @@ class GameServer(BaseHTTPRequestHandler):
         username = data.get("username")
 
         if username in GAMES[game_id]["players"]:
-            self.send_json_response({
-                "success": True,
-                "message": f"Already joined game {game_id}."
-            })
+            self.send_json_response(
+                {"success": True, "message": f"Already joined game {game_id}."}
+            )
             return
 
         if game_id not in GAMES or len(GAMES[game_id]["players"]) >= 2:
-            self.send_json_response({
-                "success": False,
-                "message": f"Cannot join game {game_id}."
-            })
+            self.send_json_response(
+                {"success": False, "message": f"Cannot join game {game_id}."}
+            )
             return
 
         GAMES[game_id]["players"].append(username)
         DATA_GAME[username]["games"].append(game_id)
         if not GAMES[game_id]["turn"]:
             GAMES[game_id]["turn"] = username
-        save_data_game()
-        self.send_json_response({
-            "success": True,
-            "message": f"Joined game {game_id}."
-        })
+        _save_data_game()
+        self.send_json_response(
+            {"success": True, "message": f"Joined game {game_id}."})
 
     def c_players_in_game(self, data):
         """Checks the number of players currently in a game."""
@@ -264,36 +267,31 @@ class GameServer(BaseHTTPRequestHandler):
         players = GAMES[game_id]["players"]
         turn = GAMES[game_id]["turn"]
         success = len(players) >= 2
-        self.send_json_response({
-            "success": success,
-            "players": players,
-            "turn": turn
-        })
+        self.send_json_response(
+            {"success": success, "players": players, "turn": turn})
 
     def view_board(self, data):
         """Returns the current game board state."""
         game_id = data.get("game_id")
         if game_id not in GAMES:
-            self.send_json_response({
-                "success": False,
-                "message": "Invalid game."
-            })
+            self.send_json_response(
+                {"success": False, "message": "Invalid game."})
             return
-        self.send_json_response({
-            "success": True,
-            "board": GAMES[game_id]["board"]
-        })
+        self.send_json_response(
+            {"success": True, "board": GAMES[game_id]["board"]})
 
     def wait_move_second(self, data):
         """Makes client of one player to wait for move of another player."""
         username = data.get("username")
         game_id = data.get("game_id")
         if GAMES[game_id]["turn"] == username:
-            self.send_json_response({
-                "success": True,
-                "winner": GAMES[game_id]["winner"],
-                "board": GAMES[game_id]["board"]
-            })
+            self.send_json_response(
+                {
+                    "success": True,
+                    "winner": GAMES[game_id]["winner"],
+                    "board": GAMES[game_id]["board"],
+                }
+            )
             return
         else:
             self.send_json_response({"success": False})
@@ -306,42 +304,38 @@ class GameServer(BaseHTTPRequestHandler):
         x, y = data.get("x"), data.get("y")
         game = GAMES[game_id]
         if game_id not in GAMES:
-            self.send_json_response({
-                "success": False,
-                "message": "Invalid game."
-            })
+            self.send_json_response(
+                {"success": False, "message": "Invalid game."})
             return
         if GAMES[game_id]["winner"]:
-            self.send_json_response({
-                "success": True,
-                "message": "Have winner.",
-                "board": game["board"],
-                "winner": game["winner"]
-            })
+            self.send_json_response(
+                {
+                    "success": True,
+                    "message": "Have winner.",
+                    "board": game["board"],
+                    "winner": game["winner"],
+                }
+            )
             return
         if x not in range(0, 19) or y not in range(0, 19):
-            self.send_json_response({
-                "success": False,
-                "message": "Invalid row or collumm."
-            })
+            self.send_json_response(
+                {"success": False, "message": "Invalid row or column."}
+            )
             return
 
         if game["turn"] != username:
-            self.send_json_response({
-                "success": False,
-                "message": "Not your turn."
-            })
+            self.send_json_response(
+                {"success": False, "message": "Not your turn."})
             return
 
         if game["board"][x][y] != "~":
-            self.send_json_response({
-                "success": False,
-                "message": "Cell already occupied."
-            })
+            self.send_json_response(
+                {"success": False, "message": "Cell already occupied."}
+            )
             return
 
-        game["board"][x][y] = "○" \
-            if game["players"].index(username) == 0 else "●"
+        game["board"][x][y] = "○" if game["players"].index(
+            username) == 0 else "●"
         if game["turn"] == game["players"][0]:
             game["turn"] = game["players"][1]
         else:
@@ -355,16 +349,13 @@ class GameServer(BaseHTTPRequestHandler):
             game["winner"] = username
 
         self.save_game_history(GAMES, game_id)
-        self.send_json_response({
-            "success": True,
-            "board": game["board"],
-            "winner": game["winner"]
-        })
+        self.send_json_response(
+            {"success": True, "board": game["board"], "winner": game["winner"]}
+        )
 
     def check_winner(self, board, x, y):
         """
-        Checks if anyone already won the game
-        by making a row of 5 or more
+        Checks if (x, y) was a winning move.
         """
         c_zero_sym = 0
         for i in board:
@@ -376,9 +367,7 @@ class GameServer(BaseHTTPRequestHandler):
             count = 1
             for direction in (-1, 1):
                 nx, ny = x + direction * dx, y + direction * dy
-                while 0 <= nx < 19 \
-                        and 0 <= ny < 19 \
-                        and board[nx][ny] == board[x][y]:
+                while 0 <= nx < 19 and 0 <= ny < 19 and board[nx][ny] == board[x][y]:
                     count += 1
                     nx += direction * dx
                     ny += direction * dy
@@ -386,35 +375,13 @@ class GameServer(BaseHTTPRequestHandler):
                     return True
             return False
 
-        return (check_direction(1, 0) or  # Horizontal
-                check_direction(0, 1) or  # Vertical
-                check_direction(1, 1) or  # Diagonal down-right
-                check_direction(1, -1) or  # Diagonal down-left
-                check_direction(-1, 1) or  # Diagonal up-right
-                check_direction(-1, -1)  # Diagonal up-left
-                )
+        return (
+            check_direction(1, 0)  # Horizontal
+            or check_direction(0, 1)  # Vertical
+            or check_direction(1, 1)  # Diagonal down-right
+            or check_direction(1, -1)  # Diagonal down-left
+        )
 
 
 if __name__ == "__main__":
-    server_address = input(
-        "Input ip_address server\n"
-        "For local game input word: localhost\n"
-        "\tcommand: "
-    )
-
-    try:
-        # Была заимствована настройка ssl - начало
-        server = HTTPServer((server_address, PORT), GameServer)
-        # Создание SSLContext и настройка SSL
-        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        context.load_cert_chain(
-            certfile="ssl_cert/server.crt", keyfile="ssl_cert/server.key")
-
-        # Применение SSLContext к сокету сервера
-        server.socket = context.wrap_socket(server.socket, server_side=True)
-        # Была заимствована настройка ssl - конец
-
-        print(f"Server running on port {PORT}...")
-        server.serve_forever()
-    except socket.gaierror as e:
-        print('Failed. Try again')
+    main()

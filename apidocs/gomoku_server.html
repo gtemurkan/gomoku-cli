@@ -32,7 +32,7 @@
       
       <div class="navlinks">
         <span class="navbar-brand">
-          gomoku_server/gomoku <a href="index.html">API Documentation</a>
+          gomoku/ssl_cert/gomoku_server <a href="index.html">API Documentation</a>
         </span>
 
         <a href="moduleIndex.html">
@@ -144,7 +144,27 @@
         
 
         
-            <div class="itemName"><code><a href="#save_data_game" class="internal-link" title="gomoku_server.save_data_game">save<wbr></wbr>_data<wbr></wbr>_game</a></code>
+            <div class="itemName"><code><a href="#main" class="internal-link" title="gomoku_server.main">main</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_get_address_from_user" class="internal-link" title="gomoku_server._get_address_from_user">_get<wbr></wbr>_address<wbr></wbr>_from<wbr></wbr>_user</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_save_data_game" class="internal-link" title="gomoku_server._save_data_game">_save<wbr></wbr>_data<wbr></wbr>_game</a></code>
             </div>
         
 
@@ -163,27 +183,17 @@
         
 
         
-            <div class="itemName"><code><a href="#GAMES" class="internal-link" title="gomoku_server.GAMES">GAMES</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#PORT" class="internal-link" title="gomoku_server.PORT">PORT</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
             <div class="itemName"><code><a href="#DATA_GAME" class="internal-link" title="gomoku_server.DATA_GAME">DATA<wbr></wbr>_GAME</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#GAMES" class="internal-link" title="gomoku_server.GAMES">GAMES</a></code>
             </div>
         
 
@@ -251,23 +261,28 @@
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#save_data_game" class="internal-link" title="gomoku_server.save_data_game">save<wbr></wbr>_data<wbr></wbr>_game</a></code></td>
-    <td>Saves the game data to a JSON file.</td>
+    <td><code><a href="#main" class="internal-link" title="gomoku_server.main">main</a></code></td>
+    <td>Server script starting point. Creates and launches web server.</td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#DATA_GAME" class="internal-link" title="gomoku_server.DATA_GAME">DATA<wbr></wbr>_GAME</a></code></td>
+    <td>Stores users data</td>
   </tr><tr class="constant">
     
     <td>Constant</td>
     <td><code><a href="#GAMES" class="internal-link" title="gomoku_server.GAMES">GAMES</a></code></td>
     <td>History of every game is saved GAMES_HISTORY directory. At program start it loads to GAMES variable. After program stops it loads back to directory.</td>
-  </tr><tr class="constant">
+  </tr><tr class="function private">
     
-    <td>Constant</td>
-    <td><code><a href="#PORT" class="internal-link" title="gomoku_server.PORT">PORT</a></code></td>
-    <td>Port used by server. It is a constant (8433)</td>
-  </tr><tr class="variable">
+    <td>Function</td>
+    <td><code><a href="#_get_address_from_user" class="internal-link" title="gomoku_server._get_address_from_user">_get<wbr></wbr>_address<wbr></wbr>_from<wbr></wbr>_user</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
     
-    <td>Variable</td>
-    <td><code><a href="#DATA_GAME" class="internal-link" title="gomoku_server.DATA_GAME">DATA<wbr></wbr>_GAME</a></code></td>
-    <td>Stores users data</td>
+    <td>Function</td>
+    <td><code><a href="#_save_data_game" class="internal-link" title="gomoku_server._save_data_game">_save<wbr></wbr>_data<wbr></wbr>_game</a></code></td>
+    <td>Saves the game data to a JSON file.</td>
   </tr>
 </table>
           
@@ -279,18 +294,18 @@
           <div class="basefunction">
   
   
-  <a name="gomoku_server.save_data_game">
+  <a name="gomoku_server.main">
     
   </a>
-  <a name="save_data_game">
+  <a name="main">
     
   </a>
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">save_data_game</span><span class="function-signature">()</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">main</span><span class="function-signature">()</span>:
     
-    <a class="headerLink" href="#save_data_game" title="gomoku_server.save_data_game">
+    <a class="headerLink" href="#main" title="gomoku_server.main">
       
       
       ¶
@@ -298,7 +313,37 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p>Saves the game data to a JSON file.</p></div>
+    <div><p>Server script starting point. Creates and launches web server.</p></div>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="gomoku_server.DATA_GAME">
+    
+  </a>
+  <a name="DATA_GAME">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">DATA_GAME</span>: <code>dict</code> =
+    
+    <a class="headerLink" href="#DATA_GAME" title="gomoku_server.DATA_GAME">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Stores users data</p>
+<ul class="rst-simple">
+<li>username</li>
+<li>password</li>
+<li>games IDs user played</li>
+</ul>
+</div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>{}</code></pre></td></tr></table>
   </div>
 </div><div class="baseconstant">
   
@@ -324,59 +369,53 @@
     <div><p>History of every game is saved GAMES_HISTORY directory. At program start it loads to GAMES variable. After program stops it loads back to directory.</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>{}</code></pre></td></tr></table>
   </div>
-</div><div class="baseconstant">
+</div><div class="basefunction private">
   
   
-  <a name="gomoku_server.PORT">
+  <a name="gomoku_server._get_address_from_user">
     
   </a>
-  <a name="PORT">
+  <a name="_get_address_from_user">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">PORT</span>: <code>int</code> =
     
-    <a class="headerLink" href="#PORT" title="gomoku_server.PORT">
+    <span class="py-keyword">def</span> <span class="py-defname">_get_address_from_user</span><span class="function-signature">()</span>:
+    
+    <a class="headerLink" href="#_get_address_from_user" title="gomoku_server._get_address_from_user">
       
       
       ¶
     </a>
   </div>
-  <div class="functionBody">
+  <div class="docstring functionBody">
     
-    <div><p>Port used by server. It is a constant (8433)</p></div>
-    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>8443</code></pre></td></tr></table>
+    <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="basevariable">
+</div><div class="basefunction private">
   
   
-  <a name="gomoku_server.DATA_GAME">
+  <a name="gomoku_server._save_data_game">
     
   </a>
-  <a name="DATA_GAME">
+  <a name="_save_data_game">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">DATA_GAME</span> =
     
-    <a class="headerLink" href="#DATA_GAME" title="gomoku_server.DATA_GAME">
+    <span class="py-keyword">def</span> <span class="py-defname">_save_data_game</span><span class="function-signature">()</span>:
+    
+    <a class="headerLink" href="#_save_data_game" title="gomoku_server._save_data_game">
       
       
       ¶
     </a>
   </div>
-  <div class="functionBody">
+  <div class="docstring functionBody">
     
-    <div><p>Stores users data</p>
-<ul class="rst-simple">
-<li>username</li>
-<li>password</li>
-<li>games IDs user played</li>
-</ul>
-</div>
-    
+    <div><p>Saves the game data to a JSON file.</p></div>
   </div>
 </div>
         </div>
@@ -388,9 +427,9 @@
 
   
   <div class="container-fluid">
-    <a href="index.html">API Documentation</a> for gomoku_server/gomoku,
+    <a href="index.html">API Documentation</a> for gomoku/ssl_cert/gomoku_server,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    24.11.1 at 2024-12-17 17:28:13.
+    24.11.1 at 2024-12-18 17:22:34.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

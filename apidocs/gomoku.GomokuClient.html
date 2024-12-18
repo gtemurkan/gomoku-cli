@@ -32,7 +32,7 @@
       
       <div class="navlinks">
         <span class="navbar-brand">
-          gomoku_server/gomoku <a href="index.html">API Documentation</a>
+          gomoku/ssl_cert/gomoku_server <a href="index.html">API Documentation</a>
         </span>
 
         <a href="moduleIndex.html">
@@ -244,37 +244,7 @@
         <div class="childrenKindTitle">Attributes</div>
         <ul>
     
-    <li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#game_id" class="internal-link" title="gomoku.GomokuClient.game_id">game<wbr></wbr>_id</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#SERVER_URL" class="internal-link" title="gomoku.GomokuClient.SERVER_URL">SERVER<wbr></wbr>_URL</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#username" class="internal-link" title="gomoku.GomokuClient.username">username</a></code>
-            </div>
-        
-
-    </li><li class="private">
+    <li class="private">
         
         
         
@@ -291,6 +261,36 @@
 
         
             <div class="itemName"><code><a href="#__NUM_ROW" class="internal-link" title="gomoku.GomokuClient.__NUM_ROW">__NUM<wbr></wbr>_ROW</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_game_id" class="internal-link" title="gomoku.GomokuClient._game_id">_game<wbr></wbr>_id</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_server_url" class="internal-link" title="gomoku.GomokuClient._server_url">_server<wbr></wbr>_url</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_username" class="internal-link" title="gomoku.GomokuClient._username">_username</a></code>
             </div>
         
 
@@ -330,14 +330,40 @@
     </li>
 </ul>
 
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
         
-         
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku.html#main" class="internal-link" title="gomoku.main">main</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
 
         
          
 
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
         
-         
+        
+        
+
+        
+            <div class="itemName"><code><a href="gomoku.html#req" class="internal-link" title="gomoku.req">req</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
 
         
          
@@ -377,9 +403,7 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>Client class for interacting with the Gomoku game server.</p>
-<p>Attributes:</p>
-</div>
+          <div><p>Client class for interacting with the Gomoku game server.</p></div>
         </div>
 
         <div id="splitTables">
@@ -441,21 +465,6 @@
     <td>Method</td>
     <td><code><a href="#view_board" class="internal-link" title="gomoku.GomokuClient.view_board">view<wbr></wbr>_board</a></code></td>
     <td>Print an ASCII Picture of current game state including players pieces</td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#game_id" class="internal-link" title="gomoku.GomokuClient.game_id">game<wbr></wbr>_id</a></code></td>
-    <td>For internal use</td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#SERVER_URL" class="internal-link" title="gomoku.GomokuClient.SERVER_URL">SERVER<wbr></wbr>_URL</a></code></td>
-    <td>For internal use</td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#username" class="internal-link" title="gomoku.GomokuClient.username">username</a></code></td>
-    <td>For internal use</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
@@ -465,6 +474,21 @@
     
     <td>Instance Variable</td>
     <td><code><a href="#__NUM_ROW" class="internal-link" title="gomoku.GomokuClient.__NUM_ROW">__NUM<wbr></wbr>_ROW</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_game_id" class="internal-link" title="gomoku.GomokuClient._game_id">_game<wbr></wbr>_id</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_server_url" class="internal-link" title="gomoku.GomokuClient._server_url">_server<wbr></wbr>_url</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_username" class="internal-link" title="gomoku.GomokuClient._username">_username</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -745,78 +769,6 @@
     
     <div><p>Print an ASCII Picture of current game state including players pieces</p></div>
   </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="gomoku.GomokuClient.game_id">
-    
-  </a>
-  <a name="game_id">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">game_id</span> =
-    
-    <a class="headerLink" href="#game_id" title="gomoku.GomokuClient.game_id">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>For internal use</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="gomoku.GomokuClient.SERVER_URL">
-    
-  </a>
-  <a name="SERVER_URL">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">SERVER_URL</span> =
-    
-    <a class="headerLink" href="#SERVER_URL" title="gomoku.GomokuClient.SERVER_URL">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>For internal use</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="gomoku.GomokuClient.username">
-    
-  </a>
-  <a name="username">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">username</span> =
-    
-    <a class="headerLink" href="#username" title="gomoku.GomokuClient.username">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>For internal use</p></div>
-    
-  </div>
 </div><div class="baseinstancevariable private">
   
   
@@ -865,6 +817,78 @@
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="gomoku.GomokuClient._game_id">
+    
+  </a>
+  <a name="_game_id">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_game_id</span> =
+    
+    <a class="headerLink" href="#_game_id" title="gomoku.GomokuClient._game_id">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="gomoku.GomokuClient._server_url">
+    
+  </a>
+  <a name="_server_url">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_server_url</span> =
+    
+    <a class="headerLink" href="#_server_url" title="gomoku.GomokuClient._server_url">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="gomoku.GomokuClient._username">
+    
+  </a>
+  <a name="_username">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_username</span> =
+    
+    <a class="headerLink" href="#_username" title="gomoku.GomokuClient._username">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
 </div>
         </div>
       
@@ -875,9 +899,9 @@
 
   
   <div class="container-fluid">
-    <a href="index.html">API Documentation</a> for gomoku_server/gomoku,
+    <a href="index.html">API Documentation</a> for gomoku/ssl_cert/gomoku_server,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    24.11.1 at 2024-12-17 17:28:13.
+    24.11.1 at 2024-12-18 17:22:34.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
