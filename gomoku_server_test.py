@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import gomoku_server
-import io
-import sys
 
 
 class MockHandler(gomoku_server.GameServer):
