@@ -48,11 +48,6 @@ def main():
     try:
         server_address = _get_address_from_user()
         httpd = HTTPServer(server_address, GameServer)
-        # SSL_CERT_FILE = r"server.crt"
-        # SSL_KEY_FILE = r"server.key"
-        # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        # ssl_context.load_cert_chain(certfile=SSL_CERT_FILE, keyfile=SSL_KEY_FILE)
-        # httpd.socket = ssl_context.wrap_socket(httpd.socket, server_side=True)
 
         print("Server running on http://%s:%s..." % server_address)
         httpd.serve_forever()
