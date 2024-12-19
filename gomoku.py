@@ -20,6 +20,10 @@ import re
 
 
 _clear = None
+if os.name == 'nt':
+    def _clear(): return os.system('cls')
+else:
+    def _clear(): return os.system('clear')
 
 
 class GomokuClient:
@@ -430,11 +434,11 @@ def main():
     """
 
     global _clear
-    
+
     if os.name == 'nt':
-        _clear = lambda: os.system('cls')
+        def _clear(): return os.system('cls')
     else:
-        _clear = lambda: os.system('clear')
+        def _clear(): return os.system('clear')
 
     client = GomokuClient()
     _clear()

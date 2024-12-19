@@ -21,21 +21,24 @@ Launch on Windows:
 py gomoku.py
 ```
 
+Launch on Mac/Unix:
+```
+python3 gomoku.py
+```
+
 Custom server
 -------------
 
 For games on custom server **gomoku_server.py** module is required.
-You need to generate ssl_cert first.
-OpenSSL lib must be installed on your system.
-
-then generate certificate using:
-```
-py ssl_cert.py
-```
 
 Then you can launch server.
 
 Launch on Windows:
 ```
 py gomoku_server.py
+```
+
+Launch on Mac/Unix:
+```
+python3 gomoku_server.py
 ```
