@@ -77,13 +77,13 @@ class GomokuClient:
         )
 
         if ans_server_url in ["server", "<server>"]:
-            self._server_url = "http://109.196.98.96:8443"
+            self._server_url = "http://109.196.98.96:80"
             return True
         if ans_server_url in ["local", "<local>"]:
-            self._server_url = "http://localhost:8443"
+            self._server_url = "http://localhost:80"
             return True
         if bool(re.match(IP_PATTERN, ans_server_url)):
-            self._server_url = f"http://{ans_server_url}:8443"
+            self._server_url = f"http://{ans_server_url}:80"
             return True
         else:
             print("BAD VALUE")

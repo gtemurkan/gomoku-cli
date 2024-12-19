@@ -57,7 +57,7 @@ def main():
 
 
 def _get_address_from_user():
-    DEFAULT_PORT = 8443
+    DEFAULT_PORT = 80
     user_input = input(
         "Enter <address> for this server\n"
         "For local game enter <localhost>\n"
