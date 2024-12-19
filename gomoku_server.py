@@ -132,7 +132,8 @@ class GameServer(SimpleHTTPRequestHandler):
                 f.write(f'{" " * 4} {num_row}\n')
                 for row in range(len(GAMES[game_id]["board"])):
                     f.write(
-                        f"{row+1:3}| " f'{"  ".join(GAMES[game_id]["board"][row])}\n'
+                        f"{row +
+                            1:3}| " f'{"  ".join(GAMES[game_id]["board"][row])}\n'
                     )
                 f.close()
 
@@ -175,6 +176,12 @@ class GameServer(SimpleHTTPRequestHandler):
         username = data.get("username")
         password = data.get("password")
 
+        if username == 'total_id_game':
+            self.send_json_response(
+                {"success": False, "message": "Invalid username or password."}
+            )
+            return
+
         if username in DATA_GAME:
             self.send_json_response(
                 {"success": False, "message": "User already exists."}
@@ -202,6 +209,12 @@ class GameServer(SimpleHTTPRequestHandler):
         """Logs in an existing player by verifying credentials."""
         username = data.get("username")
         password = data.get("password")
+
+        if username == 'total_id_game':
+            self.send_json_response(
+                {"success": False, "message": "Invalid username or password."}
+            )
+            return
 
         if username not in DATA_GAME or DATA_GAME[username]["password"] != password:
             self.send_json_response(
