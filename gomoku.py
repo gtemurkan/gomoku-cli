@@ -301,7 +301,7 @@ class GomokuClient:
 
     def view_board(self):
         """
-        Print an ASCII Picture of current
+        Print an CLI Picture of current
         game state including players pieces
         """
         response = requests.post(
@@ -321,7 +321,7 @@ class GomokuClient:
     def make_move(self):
         """
         Interactively asks player for row and
-        column of place where theirs' piece should
+        column of place where theirs piece should
         be placed. Validated the move.
         """
         if self._game_id and self._username:
