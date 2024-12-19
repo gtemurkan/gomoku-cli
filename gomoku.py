@@ -389,8 +389,8 @@ class GomokuClient:
                                 print(f'{" " * 4} {self.__NUM_ROW}')
                                 for row in range(len(data["board"])):
                                     print(
-                                        f'{row +
-                                            1:3}| {"  ".join(data["board"][row])}'
+                                        f'{row + 1:3} '
+                                        f'| {"  ".join(data["board"][row])}'
                                     )
                                 for _ in range(3):
                                     print(f"Winner: {data['winner']}")
