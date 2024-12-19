@@ -132,8 +132,8 @@ class GameServer(SimpleHTTPRequestHandler):
                 f.write(f'{" " * 4} {num_row}\n')
                 for row in range(len(GAMES[game_id]["board"])):
                     f.write(
-                        f"{row +
-                            1:3}| " f'{"  ".join(GAMES[game_id]["board"][row])}\n'
+                        f"{row + 1:3}| "
+                        f'{"  ".join(GAMES[game_id]["board"][row])}\n'
                     )
                 f.close()
 
