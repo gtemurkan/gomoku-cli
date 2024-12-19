@@ -433,13 +433,6 @@ def main():
     Starting point for the gomoku client script.
     """
 
-    global _clear
-
-    if os.name == 'nt':
-        def _clear(): return os.system('cls')
-    else:
-        def _clear(): return os.system('clear')
-
     client = GomokuClient()
     _clear()
 
