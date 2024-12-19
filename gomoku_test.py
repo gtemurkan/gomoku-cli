@@ -10,7 +10,7 @@ class TestGomokuClient(unittest.TestCase):
     def setUp(self):
         self.client = GomokuClient()
         self.client._username = "user1"
-        self.client._server_url = "http://localhost:8443"
+        self.client._server_url = "http://localhost:80"
         self.board = [
             ["●", "~", "~", "~", "~", "~", "~", "~", "~", "~",
                 "~", "~", "~", "~", "~", "~", "~", "~", "~"],
@@ -84,17 +84,17 @@ class TestGomokuClient(unittest.TestCase):
     def test_get_server_success_server(self):
         with patch('builtins.input', side_effect=["server"]):
             self.client.get_server()
-        self.assertEqual(self.client._server_url, "http://109.196.98.96:8443")
+        self.assertEqual(self.client._server_url, "http://109.196.98.96:80")
 
     def test_get_server_success_local(self):
         with patch('builtins.input', side_effect=["local"]):
             self.client.get_server()
-        self.assertEqual(self.client._server_url, "http://localhost:8443")
+        self.assertEqual(self.client._server_url, "http://localhost:80")
 
     def test_get_server_success_anyip(self):
         with patch('builtins.input', side_effect=["196.128.64.32"]):
             self.client.get_server()
-        self.assertEqual(self.client._server_url, "http://196.128.64.32:8443")
+        self.assertEqual(self.client._server_url, "http://196.128.64.32:80")
 
     def test_get_server_failure(self):
         captured_output = io.StringIO()
