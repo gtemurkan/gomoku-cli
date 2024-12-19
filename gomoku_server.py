@@ -68,7 +68,7 @@ def _get_address_from_user():
 
 def _save_data_game():
     """Saves the game data to a JSON file."""
-    with open("data_game.json", "w") as f:
+    with open("data_game.json", "a+") as f:
         json.dump(DATA_GAME, f)
 
 
